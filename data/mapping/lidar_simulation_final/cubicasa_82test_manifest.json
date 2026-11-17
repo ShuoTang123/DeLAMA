@@ -1,0 +1,1003 @@
+{
+  "source_dataset": "CubiCasa5k (Kalervo et al., SCIA 2019)",
+  "selection_protocol": {
+    "total_qualifying_floorplans": 276,
+    "train_count": 194,
+    "test_count": 82,
+    "train_ratio": 0.7029,
+    "eligibility_criteria": [
+      "Binary occupancy floorplan rasterized to <= 100 x 100 grid (0 = free space, 1 = structural wall).",
+      "Interior corridor split coordinate [x_c, y_c] (`train_coords.npy` / `test_coords.npy`) partitions the map into four quadrants with >= 2 quadrants exceeding 300 free navigable cells.",
+      "N = 4 simulated robots sample T = 12 poses inside non-blocked quadrants and acquire 90-ray (4-degree azimuth, max range 20 cells, p_correct = 0.9, Gaussian noise variance 0.1) simulated 2D LiDAR scans."
+    ]
+  },
+  "test_maps": [
+    {
+      "test_id": 0,
+      "height": 91,
+      "width": 100,
+      "split_coord": [
+        47,
+        42
+      ],
+      "free_cells": 4622,
+      "wall_cells": 4478,
+      "room_sha256_16": "2ee0344fb01582ef"
+    },
+    {
+      "test_id": 1,
+      "height": 100,
+      "width": 81,
+      "split_coord": [
+        41,
+        30
+      ],
+      "free_cells": 4139,
+      "wall_cells": 3961,
+      "room_sha256_16": "4e0315272c35cc47"
+    },
+    {
+      "test_id": 2,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        59,
+        48
+      ],
+      "free_cells": 5456,
+      "wall_cells": 4544,
+      "room_sha256_16": "f8e73e8df97406f3"
+    },
+    {
+      "test_id": 3,
+      "height": 91,
+      "width": 100,
+      "split_coord": [
+        51,
+        51
+      ],
+      "free_cells": 4828,
+      "wall_cells": 4272,
+      "room_sha256_16": "f6fa0ae859ab6b36"
+    },
+    {
+      "test_id": 4,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        57,
+        59
+      ],
+      "free_cells": 5836,
+      "wall_cells": 4164,
+      "room_sha256_16": "b85eb46ff8de8ede"
+    },
+    {
+      "test_id": 5,
+      "height": 100,
+      "width": 71,
+      "split_coord": [
+        58,
+        30
+      ],
+      "free_cells": 3527,
+      "wall_cells": 3573,
+      "room_sha256_16": "c5fa88cd353bc422"
+    },
+    {
+      "test_id": 6,
+      "height": 100,
+      "width": 94,
+      "split_coord": [
+        45,
+        54
+      ],
+      "free_cells": 5238,
+      "wall_cells": 4162,
+      "room_sha256_16": "2a0e8a48ef304957"
+    },
+    {
+      "test_id": 7,
+      "height": 72,
+      "width": 100,
+      "split_coord": [
+        35,
+        43
+      ],
+      "free_cells": 3058,
+      "wall_cells": 4142,
+      "room_sha256_16": "55125e2584fa4c0e"
+    },
+    {
+      "test_id": 8,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        59,
+        52
+      ],
+      "free_cells": 5015,
+      "wall_cells": 4985,
+      "room_sha256_16": "e7564e53ceb954eb"
+    },
+    {
+      "test_id": 9,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        56,
+        54
+      ],
+      "free_cells": 4539,
+      "wall_cells": 5461,
+      "room_sha256_16": "cba9e99ecfbd34a1"
+    },
+    {
+      "test_id": 10,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        47,
+        49
+      ],
+      "free_cells": 5158,
+      "wall_cells": 4842,
+      "room_sha256_16": "1317de043076869a"
+    },
+    {
+      "test_id": 11,
+      "height": 95,
+      "width": 100,
+      "split_coord": [
+        43,
+        47
+      ],
+      "free_cells": 4248,
+      "wall_cells": 5252,
+      "room_sha256_16": "71de9aab5c35ab1a"
+    },
+    {
+      "test_id": 12,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        58,
+        50
+      ],
+      "free_cells": 4763,
+      "wall_cells": 5237,
+      "room_sha256_16": "e2104aa6c3d3a7ec"
+    },
+    {
+      "test_id": 13,
+      "height": 81,
+      "width": 100,
+      "split_coord": [
+        38,
+        57
+      ],
+      "free_cells": 4101,
+      "wall_cells": 3999,
+      "room_sha256_16": "3f118406d837d404"
+    },
+    {
+      "test_id": 14,
+      "height": 59,
+      "width": 83,
+      "split_coord": [
+        31,
+        48
+      ],
+      "free_cells": 2251,
+      "wall_cells": 2646,
+      "room_sha256_16": "f4e5b847a837a83b"
+    },
+    {
+      "test_id": 15,
+      "height": 62,
+      "width": 84,
+      "split_coord": [
+        22,
+        36
+      ],
+      "free_cells": 2414,
+      "wall_cells": 2794,
+      "room_sha256_16": "dec18c7603169d37"
+    },
+    {
+      "test_id": 16,
+      "height": 100,
+      "width": 63,
+      "split_coord": [
+        48,
+        33
+      ],
+      "free_cells": 2843,
+      "wall_cells": 3457,
+      "room_sha256_16": "6d4c2e8ced7599b1"
+    },
+    {
+      "test_id": 17,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        52,
+        43
+      ],
+      "free_cells": 5104,
+      "wall_cells": 4896,
+      "room_sha256_16": "83d3b8a355b7048e"
+    },
+    {
+      "test_id": 18,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        52,
+        50
+      ],
+      "free_cells": 5360,
+      "wall_cells": 4640,
+      "room_sha256_16": "0ce55162e092bd86"
+    },
+    {
+      "test_id": 19,
+      "height": 91,
+      "width": 100,
+      "split_coord": [
+        35,
+        55
+      ],
+      "free_cells": 4531,
+      "wall_cells": 4569,
+      "room_sha256_16": "23fbd7ffa62c7f52"
+    },
+    {
+      "test_id": 20,
+      "height": 100,
+      "width": 86,
+      "split_coord": [
+        46,
+        37
+      ],
+      "free_cells": 3317,
+      "wall_cells": 5283,
+      "room_sha256_16": "ba4a63ee6227a129"
+    },
+    {
+      "test_id": 21,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        56,
+        44
+      ],
+      "free_cells": 4841,
+      "wall_cells": 5159,
+      "room_sha256_16": "b91a587019a2da42"
+    },
+    {
+      "test_id": 22,
+      "height": 81,
+      "width": 100,
+      "split_coord": [
+        50,
+        49
+      ],
+      "free_cells": 3840,
+      "wall_cells": 4260,
+      "room_sha256_16": "64cfde6d81b357fc"
+    },
+    {
+      "test_id": 23,
+      "height": 84,
+      "width": 100,
+      "split_coord": [
+        40,
+        41
+      ],
+      "free_cells": 4287,
+      "wall_cells": 4113,
+      "room_sha256_16": "bac294dec24d88ef"
+    },
+    {
+      "test_id": 24,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        54,
+        54
+      ],
+      "free_cells": 5185,
+      "wall_cells": 4815,
+      "room_sha256_16": "c744bf7a4da8a70e"
+    },
+    {
+      "test_id": 25,
+      "height": 79,
+      "width": 100,
+      "split_coord": [
+        47,
+        51
+      ],
+      "free_cells": 3227,
+      "wall_cells": 4673,
+      "room_sha256_16": "b790d32be57f4b46"
+    },
+    {
+      "test_id": 26,
+      "height": 100,
+      "width": 89,
+      "split_coord": [
+        55,
+        47
+      ],
+      "free_cells": 4783,
+      "wall_cells": 4117,
+      "room_sha256_16": "07bdc56f4dc042c1"
+    },
+    {
+      "test_id": 27,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        52,
+        44
+      ],
+      "free_cells": 5603,
+      "wall_cells": 4397,
+      "room_sha256_16": "8ea0ccdda7c28f78"
+    },
+    {
+      "test_id": 28,
+      "height": 94,
+      "width": 100,
+      "split_coord": [
+        39,
+        46
+      ],
+      "free_cells": 5049,
+      "wall_cells": 4351,
+      "room_sha256_16": "5daf82251b07b078"
+    },
+    {
+      "test_id": 29,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        48,
+        56
+      ],
+      "free_cells": 4796,
+      "wall_cells": 5204,
+      "room_sha256_16": "24f8363236b8862c"
+    },
+    {
+      "test_id": 30,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        46,
+        48
+      ],
+      "free_cells": 4162,
+      "wall_cells": 5838,
+      "room_sha256_16": "d2c8e33c5eb680c4"
+    },
+    {
+      "test_id": 31,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        51,
+        45
+      ],
+      "free_cells": 4270,
+      "wall_cells": 5730,
+      "room_sha256_16": "79d02b6b428cdcc1"
+    },
+    {
+      "test_id": 32,
+      "height": 100,
+      "width": 90,
+      "split_coord": [
+        45,
+        38
+      ],
+      "free_cells": 4397,
+      "wall_cells": 4603,
+      "room_sha256_16": "721d93a1366b9350"
+    },
+    {
+      "test_id": 33,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        40,
+        43
+      ],
+      "free_cells": 5616,
+      "wall_cells": 4384,
+      "room_sha256_16": "ce14cdb332db3391"
+    },
+    {
+      "test_id": 34,
+      "height": 48,
+      "width": 98,
+      "split_coord": [
+        32,
+        43
+      ],
+      "free_cells": 1987,
+      "wall_cells": 2717,
+      "room_sha256_16": "f3fa92bb6444c680"
+    },
+    {
+      "test_id": 35,
+      "height": 63,
+      "width": 100,
+      "split_coord": [
+        38,
+        56
+      ],
+      "free_cells": 2519,
+      "wall_cells": 3781,
+      "room_sha256_16": "fa47835f7e7511ac"
+    },
+    {
+      "test_id": 36,
+      "height": 52,
+      "width": 100,
+      "split_coord": [
+        36,
+        60
+      ],
+      "free_cells": 2114,
+      "wall_cells": 3086,
+      "room_sha256_16": "b3f7f815b3e290bf"
+    },
+    {
+      "test_id": 37,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        43,
+        59
+      ],
+      "free_cells": 4775,
+      "wall_cells": 5225,
+      "room_sha256_16": "d1a900cbc6f6cd4a"
+    },
+    {
+      "test_id": 38,
+      "height": 100,
+      "width": 81,
+      "split_coord": [
+        55,
+        45
+      ],
+      "free_cells": 3571,
+      "wall_cells": 4529,
+      "room_sha256_16": "599d94f7f9d52987"
+    },
+    {
+      "test_id": 39,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        58,
+        45
+      ],
+      "free_cells": 4734,
+      "wall_cells": 5266,
+      "room_sha256_16": "10cae369aba5023b"
+    },
+    {
+      "test_id": 40,
+      "height": 100,
+      "width": 90,
+      "split_coord": [
+        41,
+        39
+      ],
+      "free_cells": 4887,
+      "wall_cells": 4113,
+      "room_sha256_16": "e2af8b3970bdea93"
+    },
+    {
+      "test_id": 41,
+      "height": 84,
+      "width": 100,
+      "split_coord": [
+        36,
+        49
+      ],
+      "free_cells": 2726,
+      "wall_cells": 5674,
+      "room_sha256_16": "fcd8706b3dac9009"
+    },
+    {
+      "test_id": 42,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        59,
+        54
+      ],
+      "free_cells": 5215,
+      "wall_cells": 4785,
+      "room_sha256_16": "170f821092f2ef37"
+    },
+    {
+      "test_id": 43,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        55,
+        48
+      ],
+      "free_cells": 4018,
+      "wall_cells": 5982,
+      "room_sha256_16": "b12e5d2d62b36816"
+    },
+    {
+      "test_id": 44,
+      "height": 75,
+      "width": 100,
+      "split_coord": [
+        47,
+        45
+      ],
+      "free_cells": 3648,
+      "wall_cells": 3852,
+      "room_sha256_16": "def735564c5fe0b1"
+    },
+    {
+      "test_id": 45,
+      "height": 100,
+      "width": 88,
+      "split_coord": [
+        50,
+        40
+      ],
+      "free_cells": 4237,
+      "wall_cells": 4563,
+      "room_sha256_16": "8c6fd10e905e2eb8"
+    },
+    {
+      "test_id": 46,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        40,
+        51
+      ],
+      "free_cells": 5373,
+      "wall_cells": 4627,
+      "room_sha256_16": "6efb831c817bd1f3"
+    },
+    {
+      "test_id": 47,
+      "height": 88,
+      "width": 100,
+      "split_coord": [
+        35,
+        60
+      ],
+      "free_cells": 4774,
+      "wall_cells": 4026,
+      "room_sha256_16": "73cc5428912a4bf8"
+    },
+    {
+      "test_id": 48,
+      "height": 45,
+      "width": 100,
+      "split_coord": [
+        12,
+        49
+      ],
+      "free_cells": 1656,
+      "wall_cells": 2844,
+      "room_sha256_16": "01a7fbdd5ee04c05"
+    },
+    {
+      "test_id": 49,
+      "height": 82,
+      "width": 100,
+      "split_coord": [
+        33,
+        44
+      ],
+      "free_cells": 4400,
+      "wall_cells": 3800,
+      "room_sha256_16": "a0642d8212400e9b"
+    },
+    {
+      "test_id": 50,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        43,
+        44
+      ],
+      "free_cells": 4722,
+      "wall_cells": 5278,
+      "room_sha256_16": "fafd82b6ec5ac9fe"
+    },
+    {
+      "test_id": 51,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        45,
+        52
+      ],
+      "free_cells": 5374,
+      "wall_cells": 4626,
+      "room_sha256_16": "b3883c81224c16c9"
+    },
+    {
+      "test_id": 52,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        54,
+        43
+      ],
+      "free_cells": 5361,
+      "wall_cells": 4639,
+      "room_sha256_16": "f8099ca15f847d04"
+    },
+    {
+      "test_id": 53,
+      "height": 74,
+      "width": 100,
+      "split_coord": [
+        32,
+        47
+      ],
+      "free_cells": 3329,
+      "wall_cells": 4071,
+      "room_sha256_16": "3c2d598bc39ef305"
+    },
+    {
+      "test_id": 54,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        50,
+        54
+      ],
+      "free_cells": 5308,
+      "wall_cells": 4692,
+      "room_sha256_16": "8009a32575a4159f"
+    },
+    {
+      "test_id": 55,
+      "height": 51,
+      "width": 100,
+      "split_coord": [
+        32,
+        47
+      ],
+      "free_cells": 2171,
+      "wall_cells": 2929,
+      "room_sha256_16": "ecefb74a367bb6de"
+    },
+    {
+      "test_id": 56,
+      "height": 74,
+      "width": 100,
+      "split_coord": [
+        29,
+        57
+      ],
+      "free_cells": 3582,
+      "wall_cells": 3818,
+      "room_sha256_16": "7248c8e0902e69b2"
+    },
+    {
+      "test_id": 57,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        58,
+        60
+      ],
+      "free_cells": 5432,
+      "wall_cells": 4568,
+      "room_sha256_16": "b9c7823217c0dd92"
+    },
+    {
+      "test_id": 58,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        49,
+        55
+      ],
+      "free_cells": 3826,
+      "wall_cells": 6174,
+      "room_sha256_16": "1cd9036210eb4614"
+    },
+    {
+      "test_id": 59,
+      "height": 84,
+      "width": 75,
+      "split_coord": [
+        33,
+        34
+      ],
+      "free_cells": 2947,
+      "wall_cells": 3353,
+      "room_sha256_16": "418c785344b72097"
+    },
+    {
+      "test_id": 60,
+      "height": 100,
+      "width": 91,
+      "split_coord": [
+        45,
+        39
+      ],
+      "free_cells": 4506,
+      "wall_cells": 4594,
+      "room_sha256_16": "756a8edb8e16b995"
+    },
+    {
+      "test_id": 61,
+      "height": 89,
+      "width": 91,
+      "split_coord": [
+        44,
+        53
+      ],
+      "free_cells": 4208,
+      "wall_cells": 3891,
+      "room_sha256_16": "0f9b1a4096a7e157"
+    },
+    {
+      "test_id": 62,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        47,
+        50
+      ],
+      "free_cells": 5066,
+      "wall_cells": 4934,
+      "room_sha256_16": "4bacf4006e4910e0"
+    },
+    {
+      "test_id": 63,
+      "height": 100,
+      "width": 85,
+      "split_coord": [
+        56,
+        35
+      ],
+      "free_cells": 4585,
+      "wall_cells": 3915,
+      "room_sha256_16": "57fe313ae5cbe4b0"
+    },
+    {
+      "test_id": 64,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        52,
+        58
+      ],
+      "free_cells": 5409,
+      "wall_cells": 4591,
+      "room_sha256_16": "1b4479d38c59b92c"
+    },
+    {
+      "test_id": 65,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        59,
+        44
+      ],
+      "free_cells": 5324,
+      "wall_cells": 4676,
+      "room_sha256_16": "de8e9797f25cf495"
+    },
+    {
+      "test_id": 66,
+      "height": 83,
+      "width": 100,
+      "split_coord": [
+        36,
+        49
+      ],
+      "free_cells": 4387,
+      "wall_cells": 3913,
+      "room_sha256_16": "9d44d392acb9c467"
+    },
+    {
+      "test_id": 67,
+      "height": 72,
+      "width": 100,
+      "split_coord": [
+        39,
+        40
+      ],
+      "free_cells": 3576,
+      "wall_cells": 3624,
+      "room_sha256_16": "1aee55dd6122dfdf"
+    },
+    {
+      "test_id": 68,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        58,
+        48
+      ],
+      "free_cells": 4995,
+      "wall_cells": 5005,
+      "room_sha256_16": "8301194fcf0a82c0"
+    },
+    {
+      "test_id": 69,
+      "height": 83,
+      "width": 100,
+      "split_coord": [
+        32,
+        42
+      ],
+      "free_cells": 4007,
+      "wall_cells": 4293,
+      "room_sha256_16": "ed2bfbd35a51e1ba"
+    },
+    {
+      "test_id": 70,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        46,
+        42
+      ],
+      "free_cells": 5348,
+      "wall_cells": 4652,
+      "room_sha256_16": "5af5e394455702cb"
+    },
+    {
+      "test_id": 71,
+      "height": 98,
+      "width": 94,
+      "split_coord": [
+        59,
+        37
+      ],
+      "free_cells": 4891,
+      "wall_cells": 4321,
+      "room_sha256_16": "80b37ca89cbcdef4"
+    },
+    {
+      "test_id": 72,
+      "height": 75,
+      "width": 100,
+      "split_coord": [
+        44,
+        46
+      ],
+      "free_cells": 3529,
+      "wall_cells": 3971,
+      "room_sha256_16": "faf1986bcb3f318f"
+    },
+    {
+      "test_id": 73,
+      "height": 63,
+      "width": 100,
+      "split_coord": [
+        24,
+        54
+      ],
+      "free_cells": 2857,
+      "wall_cells": 3443,
+      "room_sha256_16": "f708f50f6b915ffe"
+    },
+    {
+      "test_id": 74,
+      "height": 50,
+      "width": 100,
+      "split_coord": [
+        23,
+        43
+      ],
+      "free_cells": 2266,
+      "wall_cells": 2734,
+      "room_sha256_16": "1242ab07456a1c6c"
+    },
+    {
+      "test_id": 75,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        47,
+        46
+      ],
+      "free_cells": 4762,
+      "wall_cells": 5238,
+      "room_sha256_16": "19b62340cae6b113"
+    },
+    {
+      "test_id": 76,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        43,
+        43
+      ],
+      "free_cells": 5621,
+      "wall_cells": 4379,
+      "room_sha256_16": "ca290dbc246be0e7"
+    },
+    {
+      "test_id": 77,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        50,
+        47
+      ],
+      "free_cells": 5235,
+      "wall_cells": 4765,
+      "room_sha256_16": "6587d9a2be93d65e"
+    },
+    {
+      "test_id": 78,
+      "height": 93,
+      "width": 100,
+      "split_coord": [
+        41,
+        58
+      ],
+      "free_cells": 4794,
+      "wall_cells": 4506,
+      "room_sha256_16": "1e8017331561cbda"
+    },
+    {
+      "test_id": 79,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        55,
+        60
+      ],
+      "free_cells": 5205,
+      "wall_cells": 4795,
+      "room_sha256_16": "5d9801e81c69d297"
+    },
+    {
+      "test_id": 80,
+      "height": 92,
+      "width": 100,
+      "split_coord": [
+        42,
+        50
+      ],
+      "free_cells": 4754,
+      "wall_cells": 4446,
+      "room_sha256_16": "5ea7b37894b71b4e"
+    },
+    {
+      "test_id": 81,
+      "height": 100,
+      "width": 100,
+      "split_coord": [
+        55,
+        53
+      ],
+      "free_cells": 5772,
+      "wall_cells": 4228,
+      "room_sha256_16": "623364e5ea5692e3"
+    }
+  ],
+  "npz_archive": "data/mapping/lidar_simulation_final/sample_check_test_82maps.npz",
+  "npz_sha256": "31f5284a2325f265b40f2f4134efca889953d28ebebfa3b2a61b9734f5cf8b8b",
+  "npz_size_mb": 3.829
+}

@@ -1,0 +1,238 @@
+{
+  "created_at_utc": "2026-11-11T09:56:59Z",
+  "feature_dim": 128,
+  "protocols": {
+    "p1_unseen": {
+      "protocol": "p1",
+      "feature_dim": 128,
+      "world_size": 8,
+      "gpu_list": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "warmup_epochs": 20,
+      "warmup_sec": 0.0,
+      "peak_vram_mb": 449.69,
+      "stage3A_nocollab": {
+        "phi_path": "checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt",
+        "phi_sha256": "10fac95374059da800f1be73160b4ac9ef57152f4bf54ebcab3e220789d0e4d8",
+        "param_path": "checkpoints/cifar100/p1_stage1_nocollab_param.npy",
+        "param_sha256": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
+        "train_log": "results/cifar100/train_logs/p1_stage1_unroll.jsonl",
+        "best_epoch": 1,
+        "total_epochs": 48,
+        "episodes_per_epoch": 160,
+        "total_episodes": 7680,
+        "elapsed_sec": 996.92,
+        "gamma": 0.07840976864099503,
+        "val_metrics": {
+          "val_final_acc": 0.5640355558196704,
+          "val_final_acc_std": 0.01533509643203978,
+          "val_aia": 0.37866444426774976,
+          "val_seen_cil_final_acc": 0.5640355558575441,
+          "val_seen_cil_aia": 0.6662749819726399,
+          "val_task_forgetting": 0.14228888922819385,
+          "val_class_forgetting": 0.13716000023080657,
+          "val_gmse": 0.0,
+          "val_final_gmse": 0.0,
+          "val_graph_same": 0.0,
+          "val_final_graph_same": 0.0
+        }
+      },
+      "stage3B_collab": {
+        "phi_path": "checkpoints/cifar100/p1_stage2_collab_phi_d128.pt",
+        "phi_sha256": "ffea1f5cebc32f1b2b892429cc65ce7aaf19d9b9dd21cf1939be8f750e6ce448",
+        "param_path": "checkpoints/cifar100/p1_stage2_collab_param.npy",
+        "param_sha256": "f8932abb858cb1d1afde8fc19ad499082595b2915728bea0fb0b04470134a336",
+        "train_log": "results/cifar100/train_logs/p1_stage2_unroll.jsonl",
+        "best_epoch": 39,
+        "total_epochs": 45,
+        "episodes_per_epoch": 160,
+        "total_episodes": 7200,
+        "elapsed_sec": 1542.9,
+        "gamma": 0.08337807655334473,
+        "raw_hyper_param": [
+          3.6231725971447304e-05,
+          0.14328055083751678,
+          0.1210881918668747
+        ],
+        "effective_lambdas": {
+          "lambda1": 4.6231725718826056e-05,
+          "lambda2": 0.14329054951667786,
+          "lambda3": 0.12109819054603577
+        },
+        "val_metrics": {
+          "val_final_acc": 0.620286666850249,
+          "val_final_acc_std": 0.017205111392835388,
+          "val_aia": 0.4098699998036026,
+          "val_seen_cil_final_acc": 0.6202866673478857,
+          "val_seen_cil_aia": 0.715498778081675,
+          "val_task_forgetting": 0.1311580248542682,
+          "val_class_forgetting": 0.12408444455545396,
+          "val_gmse": 0.21140099997350556,
+          "val_final_gmse": 0.07296962839408111,
+          "val_graph_same": 0.9865127001553289,
+          "val_final_graph_same": 0.9999965076721827
+        },
+        "collab_gain_val_final_acc": 0.056251,
+        "collab_gain_val_seen_cil_aia": 0.049224
+      }
+    },
+    "p2_imgdisj": {
+      "protocol": "p2",
+      "feature_dim": 128,
+      "world_size": 4,
+      "gpu_list": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "warmup_epochs": 20,
+      "warmup_sec": 118.58,
+      "peak_vram_mb": 469.98,
+      "stage3A_nocollab": {
+        "phi_path": "checkpoints/cifar100/p2_stage1_nocollab_phi_d128.pt",
+        "phi_sha256": "ea859fd816ad67060d7d6814e0264a2cac412f56f0cfd510ce9a1d3532903d96",
+        "param_path": "checkpoints/cifar100/p2_stage1_nocollab_param.npy",
+        "param_sha256": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
+        "train_log": "results/cifar100/train_logs/p2_stage1_unroll.jsonl",
+        "best_epoch": 47,
+        "total_epochs": 48,
+        "episodes_per_epoch": 160,
+        "total_episodes": 7680,
+        "elapsed_sec": 941.38,
+        "gamma": 0.04106607288122177,
+        "val_metrics": {
+          "val_final_acc": 0.6389777779579162,
+          "val_final_acc_std": 0.043565809520469755,
+          "val_aia": 0.41348444430033365,
+          "val_seen_cil_final_acc": 0.6389777793164054,
+          "val_seen_cil_aia": 0.7131069431905841,
+          "val_task_forgetting": 0.11038271314430016,
+          "val_class_forgetting": 0.10945555206015706,
+          "val_gmse": 0.0,
+          "val_final_gmse": 0.0,
+          "val_graph_same": 0.0,
+          "val_final_graph_same": 0.0
+        }
+      },
+      "stage3B_collab": {
+        "phi_path": "checkpoints/cifar100/p2_stage2_collab_phi_d128.pt",
+        "phi_sha256": "87db505ac3771b2f85ee25bceed90b3478cdeb1385ee2a0d432c3eeeaa3aa921",
+        "param_path": "checkpoints/cifar100/p2_stage2_collab_param.npy",
+        "param_sha256": "ee115cad322b401ea155351eae9493d65bbb4f9f168d75025472b379fdaa8dff",
+        "train_log": "results/cifar100/train_logs/p2_stage2_unroll.jsonl",
+        "best_epoch": 24,
+        "total_epochs": 48,
+        "episodes_per_epoch": 160,
+        "total_episodes": 7680,
+        "elapsed_sec": 2769.46,
+        "gamma": 0.04123498499393463,
+        "raw_hyper_param": [
+          3.308108716737479e-06,
+          0.1685251146554947,
+          0.2999899983406067
+        ],
+        "effective_lambdas": {
+          "lambda1": 1.330810846411623e-05,
+          "lambda2": 0.16853511333465576,
+          "lambda3": 0.30000001192092896
+        },
+        "val_metrics": {
+          "val_final_acc": 0.6842555561661721,
+          "val_final_acc_std": 0.03960617992165464,
+          "val_aia": 0.43813666672259566,
+          "val_seen_cil_final_acc": 0.6842555563822388,
+          "val_seen_cil_aia": 0.7532881463282121,
+          "val_task_forgetting": 0.09666666349120163,
+          "val_class_forgetting": 0.0947555518684288,
+          "val_gmse": 0.1582851711135677,
+          "val_final_gmse": 0.07044598414235662,
+          "val_graph_same": 0.9638822983897768,
+          "val_final_graph_same": 0.9999959609852523
+        },
+        "collab_gain_val_final_acc": 0.045278,
+        "collab_gain_val_seen_cil_aia": 0.040181
+      }
+    }
+  },
+  "_provenance": {
+    "timestamp_utc": "2026-11-11T09:56:59Z",
+    "stage": "stage3_manifest",
+    "run_id": "stage3_checkpoint_manifest",
+    "hostname": "di-20260507172106-sxwmm",
+    "python_executable": "/data/conda/miniconda/envs/dp_survey/bin/python",
+    "python_version": "3.12.12",
+    "torch_version": "2.9.1+cu128",
+    "script": "experiments/cifar100/train_unrolling.py",
+    "argv": [
+      "experiments/cifar100/train_unrolling.py",
+      "--update_manifest_only"
+    ],
+    "git": {
+      "commit": "c080805b4cc954c03238cd697d3cac2225f9ea24",
+      "dirty_count": 24,
+      "dirty_preview": [
+        " M results/modern_baselines/EXPERIMENT1_RESULTS.md",
+        " M results/scalability/SCALABILITY_RESULTS.md",
+        " M src/classification_dataset.py",
+        " M src/classification_v2.py",
+        " M src/graph_algorithms.py",
+        " M src/lm_delama/data.py",
+        " M src/lm_delama/delama_lm.py",
+        " M src/lm_delama/episodes.py",
+        " M src/modern_baselines/base.py",
+        " M src/modern_baselines/codec.py",
+        " M src/modern_baselines/dadpfl.py",
+        " M src/modern_baselines/dcfcl.py",
+        " M src/modern_baselines/delama_wrapper.py",
+        " M src/modern_baselines/dpfl.py",
+        " M src/modern_baselines/metrics.py",
+        " M src/modern_baselines/runner.py",
+        " M src/nonlinear_regression.py",
+        " M src/utils.py",
+        " M tools/summarize_scalability.py",
+        "?? docs/",
+        "?? experiments/cifar100/",
+        "?? experiments/cifar100_pilot/",
+        "?? src/modern_baselines/classic_graphs.py",
+        "?? tools/summarize_schemeA.py"
+      ]
+    },
+    "config": {
+      "protocols": [
+        "p1_unseen",
+        "p2_imgdisj"
+      ],
+      "feature_dim": 128
+    },
+    "inputs_sha256": {
+      "data/core/cifar100_splits/split_manifest.json": "aa407445b59894c44c0ececfce4b9bc2d6007fc5e1cf12a0562c1bfc899b3cf4"
+    },
+    "outputs_sha256": {
+      "checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt": "10fac95374059da800f1be73160b4ac9ef57152f4bf54ebcab3e220789d0e4d8",
+      "checkpoints/cifar100/p1_stage1_nocollab_param.npy": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
+      "checkpoints/cifar100/p1_stage2_collab_phi_d128.pt": "ffea1f5cebc32f1b2b892429cc65ce7aaf19d9b9dd21cf1939be8f750e6ce448",
+      "checkpoints/cifar100/p1_stage2_collab_param.npy": "f8932abb858cb1d1afde8fc19ad499082595b2915728bea0fb0b04470134a336",
+      "checkpoints/cifar100/p2_stage1_nocollab_phi_d128.pt": "ea859fd816ad67060d7d6814e0264a2cac412f56f0cfd510ce9a1d3532903d96",
+      "checkpoints/cifar100/p2_stage1_nocollab_param.npy": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
+      "checkpoints/cifar100/p2_stage2_collab_phi_d128.pt": "87db505ac3771b2f85ee25bceed90b3478cdeb1385ee2a0d432c3eeeaa3aa921",
+      "checkpoints/cifar100/p2_stage2_collab_param.npy": "ee115cad322b401ea155351eae9493d65bbb4f9f168d75025472b379fdaa8dff",
+      "checkpoints/cifar100/checkpoint_manifest.json": "80e023e0580a484e8c9017770383645f805a364efd6a50cd17b09e7dd46db2e3"
+    },
+    "metrics_summary": {
+      "p1_s3a_val_final": 0.5640355558196704,
+      "p1_s3b_val_final": 0.620286666850249,
+      "p2_s3a_val_final": 0.6389777779579162,
+      "p2_s3b_val_final": 0.6842555561661721
+    },
+    "notes": "Unified Stage 3 two-stage Kronecker unrolling checkpoint manifest (P1 & P2)"
+  }
+}

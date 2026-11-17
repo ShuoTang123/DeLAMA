@@ -1,0 +1,37 @@
+# Python & IDE caches
+__pycache__/
+*.py[cod]
+*.egg-info/
+.idea/
+.vscode/
+.ipynb_checkpoints/
+tmp/
+*.log
+nohup.out
+
+# Release v1.0.0 downloaded / extracted heavy assets
+# Fetch locally via: python3 scripts/download_assets.py
+checkpoints/cifar100/*.pt
+checkpoints/core/model/*.pt
+checkpoints/core/param/*.npy
+checkpoints/lm/*.pt
+checkpoints/mapping/lidar_simulation_final/model/*.pt
+checkpoints/mapping/lidar_simulation_final/param/*.npy
+data/mapping/lidar_simulation_final/*.npy
+data/mapping/lidar_simulation_final/*.npz
+results/cifar100/raw_runs/*.json
+results/mapping/*.json
+results/modern_baselines/*.json
+results/scalability/*.json
+
+# Large raw / derived dataset archives & runtime caches (generated locally via build_splits.py)
+*.pkl
+*.tar.gz
+*.pickled
+*-ubyte
+data_batch_*
+test_batch
+batches.meta
+results/modern_baselines/cache_*.pt
+results/mapping/*/imgs/*.png
+results/mapping/*/gifs/*.gif
