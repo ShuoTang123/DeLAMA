@@ -58,9 +58,9 @@ python3 experiments/cifar100/verify_paper_results.py
 
 | Archive | Contents | Size | SHA256 Prefix |
 | :--- | :--- | :--- | :--- |
-| `delama_checkpoints_v1.0.0.tar.gz` | Trained Checkpoints (ResNet-18, TinyGPT, LiDAR) (50 files) | `198.16 MB` | `d1cf54ba6c5a9f1b` |
+| `delama_checkpoints_v1.0.0.tar.gz` | Trained Checkpoints (ResNet-18, TinyGPT, LiDAR) (50 files) | `198.22 MB` | `18308380fbbf986b` |
 | `delama_data_mapping_v1.0.0.tar.gz` | Preprocessed CubiCasa5k LiDAR Floorplans (5 files) | `3.90 MB` | `889e33732cdc440d` |
-| `delama_raw_results_v1.0.0.tar.gz` | Full Per-Episode Raw JSON Logs (45 files) | `4.58 MB` | `da3f2903d75857ca` |
+| `delama_raw_results_v1.0.0.tar.gz` | Full Per-Episode Raw JSON Logs (45 files) | `4.58 MB` | `b4e5f450b92edd88` |
 
 ## Datasets & Reproducing Experiments
 
@@ -79,10 +79,11 @@ python3 experiments/cifar100/build_splits.py
 python3 experiments/cifar100/verify_splits.py
 ```
 
-Run two-stage differentiable Kronecker unrolling (Stage A solo + Stage B collaborative) on multi-GPU:
+Run two-stage differentiable Kronecker unrolling (Stage A solo + Stage B collaborative, initialized from the 50-epoch supervised checkpoint `p1_sup_ce_phi_d128.pt`) on multi-GPU:
 
 ```bash
-torchrun --nproc_per_node=8 experiments/cifar100/train_unrolling.py --protocol p1
+python3 experiments/cifar100/run_independent_backbone_control.py
+torchrun --nproc_per_node=4 experiments/cifar100/train_unrolling.py   --protocol p1 --warmup_ckpt checkpoints/cifar100/p1_sup_ce_phi_d128.pt   --stage1_epochs 8 --stage2_epochs 12 --episodes_per_epoch 160
 ```
 
 Evaluate the 24-method Protocol P1/P2 benchmarks, zero-retraining multi-agent scaling (`N = 6, 12, 24`), 3-backbone fairness control, multi-hop/stress controls, non-revisiting `P1-NR5`/`P1-NR10`, budget-matched Pareto curves, 5-seed class-split cross-validation, and Newton residual convergence:
@@ -122,8 +123,8 @@ python3 experiments/mapping/run_mapping_82maps_benchmark.py --workers 32
 
 | Checkpoint Path | Size | SHA256 Prefix |
 | :--- | :--- | :--- |
-| `checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt` | `18.92 MB` | `10fac95374059da8` |
-| `checkpoints/cifar100/p1_stage2_collab_phi_d128.pt` | `18.92 MB` | `ffea1f5cebc32f1b` |
+| `checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt` | `18.92 MB` | `01b2a90f883f4fb2` |
+| `checkpoints/cifar100/p1_stage2_collab_phi_d128.pt` | `18.92 MB` | `56a4ab0db79859da` |
 | `checkpoints/cifar100/p1_sup_ce_phi_d128.pt` | `18.92 MB` | `b190ebfd6cb6867d` |
 | `checkpoints/cifar100/p1_sup_ce_seed2024_phi_d128.pt` | `18.92 MB` | `7446228163cd2cbe` |
 | `checkpoints/cifar100/p1_sup_ce_seed2025_phi_d128.pt` | `18.92 MB` | `42ec41a4379f18d2` |

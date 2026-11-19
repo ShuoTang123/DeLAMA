@@ -750,7 +750,10 @@ def run_protocol_training(args: argparse.Namespace) -> None:
         stage1_sec = float(s1_loaded.get("elapsed_sec", 0.0))
         best_s1_val = dict(s1_loaded["val_metrics"])
         phi.load_state_dict({k: v.to(device=device) for k, v in best_s1_phi_cpu.items()})
-        raw_gamma = nn.Parameter(torch.tensor(raw_from_gamma(best_s1_gamma), device=device, dtype=torch.float32))
+        g_min_val, g_max_val = (0.015, 0.30) if protocol == "p1" else (0.025, 0.20)
+        raw_gamma = nn.Parameter(
+            torch.tensor(raw_from_gamma(best_s1_gamma, g_min=g_min_val, g_max=g_max_val), device=device, dtype=torch.float32)
+        )
         stage1_params = list(phi.parameters()) + [raw_gamma]
         sync_parameters_from_rank0(stage1_params, world_size)
         if rank == 0:
@@ -761,90 +764,117 @@ def run_protocol_training(args: argparse.Namespace) -> None:
             )
     else:
         # =========================================================================
-        # Phase 0: Short Representation Warmup strictly inside Meta-Train partition
+        # Phase 0: Representation Warmup strictly inside Meta-Train partition
         # =========================================================================
         warmup_epochs = 1 if args.smoke else args.warmup_epochs
-        xs_warm, ys_warm = [], []
-        for loc_y, cls in enumerate(train_classes):
-            xs_warm.append(cifar["train_by_class"][cls][:warmup_img_limit])
-            ys_warm.append(torch.full((warmup_img_limit,), loc_y, dtype=torch.long))
-        x_warm_all = torch.cat(xs_warm, dim=0)
-        y_warm_all = torch.cat(ys_warm, dim=0)
-        n_warm = x_warm_all.shape[0]
-
-        warm_head = nn.Linear(feature_dim, len(train_classes), bias=True).to(device=device, dtype=torch.float32)
-        warm_params = list(phi.parameters()) + list(warm_head.parameters())
-        sync_parameters_from_rank0(warm_params, world_size)
-
-        opt_warm = torch.optim.AdamW(warm_params, lr=1.2e-3, weight_decay=5e-4)
-        sched_warm = torch.optim.lr_scheduler.CosineAnnealingLR(opt_warm, T_max=max(1, warmup_epochs), eta_min=5e-5)
-
-        per_rank_bs = 64
-        global_bs = per_rank_bs * world_size
         t_warm_start = time.time()
-        for ep in range(warmup_epochs):
-            g_perm = torch.Generator()
-            g_perm.manual_seed(base_seed + ep)
-            perm = torch.randperm(n_warm, generator=g_perm)
-            n_steps = n_warm // global_bs
-            if args.smoke:
-                n_steps = min(n_steps, 6)
-            phi.train()
-            warm_head.train()
-            for s_idx in range(n_steps):
-                chunk_idx = perm[s_idx * global_bs : (s_idx + 1) * global_bs]
-                my_idx = chunk_idx[rank * per_rank_bs : (rank + 1) * per_rank_bs]
-                bx = augment_batch_gpu(x_warm_all[my_idx].to(device=device, non_blocking=True))
-                by = y_warm_all[my_idx].to(device=device, non_blocking=True)
-                opt_warm.zero_grad(set_to_none=True)
-                bx.requires_grad_(True)
-                feats = checkpoint(phi, bx, use_reentrant=False)
-                # Cosine-normalized + linear logits for clean spherical cluster geometry
-                logits_lin = warm_head(feats)
-                feats_n = F.normalize(feats, p=2, dim=1)
-                w_n = F.normalize(warm_head.weight, p=2, dim=1)
-                logits_cos = 16.0 * (feats_n @ w_n.T)
-                loss = 0.5 * F.cross_entropy(logits_lin, by, label_smoothing=0.05) + 0.5 * F.cross_entropy(
-                    logits_cos, by, label_smoothing=0.05
+        if args.warmup_ckpt:
+            wc = torch.load(args.warmup_ckpt, map_location="cpu", weights_only=False)
+            phi.load_state_dict({k: v.to(device=device) for k, v in wc["state_dict"].items()})
+            warmup_epochs = int(wc.get("epochs", warmup_epochs))
+            sync_parameters_from_rank0(list(phi.parameters()), world_size)
+            warmup_sec = float(wc.get("train_sec", 0.0))
+            if rank == 0:
+                print(
+                    f"[{protocol.upper()}] Loaded {warmup_epochs}-epoch supervised CE warmup from {args.warmup_ckpt}",
+                    flush=True,
                 )
-                loss.backward()
-                allreduce_gradients_gloo(warm_params, world_size)
-                torch.nn.utils.clip_grad_norm_(warm_params, max_norm=5.0)
-                opt_warm.step()
-            sched_warm.step()
-        del warm_head, opt_warm, sched_warm, x_warm_all, y_warm_all
-        torch.cuda.empty_cache()
-        warmup_sec = time.time() - t_warm_start
-        if rank == 0:
-            vram_mb = torch.cuda.max_memory_allocated(device) / (1024.0 ** 2)
-            print(
-                f"[{protocol.upper()}] Warmup ({warmup_epochs} epochs) finished in {warmup_sec:.1f}s | peak_VRAM={vram_mb:.1f} MB",
-                flush=True,
-            )
+        else:
+            xs_warm, ys_warm = [], []
+            for loc_y, cls in enumerate(train_classes):
+                xs_warm.append(cifar["train_by_class"][cls][:warmup_img_limit])
+                ys_warm.append(torch.full((warmup_img_limit,), loc_y, dtype=torch.long))
+            x_warm_all = torch.cat(xs_warm, dim=0)
+            y_warm_all = torch.cat(ys_warm, dim=0)
+            n_warm = x_warm_all.shape[0]
+
+            warm_head = nn.Linear(feature_dim, len(train_classes), bias=True).to(device=device, dtype=torch.float32)
+            warm_params = list(phi.parameters()) + list(warm_head.parameters())
+            sync_parameters_from_rank0(warm_params, world_size)
+
+            opt_warm = torch.optim.AdamW(warm_params, lr=1.2e-3, weight_decay=5e-4)
+            sched_warm = torch.optim.lr_scheduler.CosineAnnealingLR(opt_warm, T_max=max(1, warmup_epochs), eta_min=5e-5)
+
+            per_rank_bs = 64
+            global_bs = per_rank_bs * world_size
+            for ep in range(warmup_epochs):
+                g_perm = torch.Generator()
+                g_perm.manual_seed(base_seed + ep)
+                perm = torch.randperm(n_warm, generator=g_perm)
+                n_steps = n_warm // global_bs
+                if args.smoke:
+                    n_steps = min(n_steps, 6)
+                phi.train()
+                warm_head.train()
+                for s_idx in range(n_steps):
+                    chunk_idx = perm[s_idx * global_bs : (s_idx + 1) * global_bs]
+                    my_idx = chunk_idx[rank * per_rank_bs : (rank + 1) * per_rank_bs]
+                    bx = augment_batch_gpu(x_warm_all[my_idx].to(device=device, non_blocking=True))
+                    by = y_warm_all[my_idx].to(device=device, non_blocking=True)
+                    opt_warm.zero_grad(set_to_none=True)
+                    bx.requires_grad_(True)
+                    feats = checkpoint(phi, bx, use_reentrant=False)
+                    # Cosine-normalized + linear logits for clean spherical cluster geometry
+                    logits_lin = warm_head(feats)
+                    feats_n = F.normalize(feats, p=2, dim=1)
+                    w_n = F.normalize(warm_head.weight, p=2, dim=1)
+                    logits_cos = 16.0 * (feats_n @ w_n.T)
+                    loss = 0.5 * F.cross_entropy(logits_lin, by, label_smoothing=0.05) + 0.5 * F.cross_entropy(
+                        logits_cos, by, label_smoothing=0.05
+                    )
+                    loss.backward()
+                    allreduce_gradients_gloo(warm_params, world_size)
+                    torch.nn.utils.clip_grad_norm_(warm_params, max_norm=5.0)
+                    opt_warm.step()
+                sched_warm.step()
+            del warm_head, opt_warm, sched_warm, x_warm_all, y_warm_all
+            torch.cuda.empty_cache()
+            warmup_sec = time.time() - t_warm_start
+            if rank == 0:
+                vram_mb = torch.cuda.max_memory_allocated(device) / (1024.0 ** 2)
+                print(
+                    f"[{protocol.upper()}] Warmup ({warmup_epochs} epochs) finished in {warmup_sec:.1f}s | peak_VRAM={vram_mb:.1f} MB",
+                    flush=True,
+                )
 
         # =========================================================================
         # Stage 3A: Single-Agent Continual Second-Order Kronecker Unrolling
         # =========================================================================
         stage1_epochs = 1 if args.smoke else args.stage1_epochs
+        g_min_val, g_max_val = (0.015, 0.30) if protocol == "p1" else (0.025, 0.20)
 
-        raw_gamma = nn.Parameter(torch.tensor(raw_from_gamma(0.08), device=device, dtype=torch.float32))
+        raw_gamma = nn.Parameter(
+            torch.tensor(raw_from_gamma(0.08, g_min=g_min_val, g_max=g_max_val), device=device, dtype=torch.float32)
+        )
         stage1_params = list(phi.parameters()) + [raw_gamma]
         sync_parameters_from_rank0(stage1_params, world_size)
+        warm_anchor_params = [p.detach().clone() for p in phi.parameters()]
 
-        opt_s1 = torch.optim.AdamW(
-            [
-                {"params": list(phi.parameters()), "lr": 2.2e-4, "weight_decay": 1e-4},
-                {"params": [raw_gamma], "lr": 3.0e-3, "weight_decay": 0.0},
-            ]
-        )
-        sched_s1 = torch.optim.lr_scheduler.CosineAnnealingLR(opt_s1, T_max=max(1, stage1_epochs), eta_min=8e-6)
+        if protocol == "p1":
+            opt_s1 = torch.optim.AdamW(
+                [
+                    {"params": list(phi.parameters()), "lr": 3.0e-6, "weight_decay": 1e-4},
+                    {"params": [raw_gamma], "lr": 2.5e-2, "weight_decay": 0.0},
+                ]
+            )
+            sched_s1 = torch.optim.lr_scheduler.CosineAnnealingLR(opt_s1, T_max=max(1, stage1_epochs), eta_min=1e-7)
+            s1_prox_mu = 0.5
+        else:
+            opt_s1 = torch.optim.AdamW(
+                [
+                    {"params": list(phi.parameters()), "lr": 2.2e-4, "weight_decay": 1e-4},
+                    {"params": [raw_gamma], "lr": 3.0e-3, "weight_decay": 0.0},
+                ]
+            )
+            sched_s1 = torch.optim.lr_scheduler.CosineAnnealingLR(opt_s1, T_max=max(1, stage1_epochs), eta_min=8e-6)
+            s1_prox_mu = 0.0
 
         if rank == 0 and s1_log_path.exists():
             s1_log_path.unlink()
 
         best_s1_score = -1.0
         best_s1_epoch = 0
-        best_s1_gamma = float(gamma_from_raw(raw_gamma).item())
+        best_s1_gamma = float(gamma_from_raw(raw_gamma, g_min=g_min_val, g_max=g_max_val).item())
         best_s1_phi_cpu = {k: v.detach().cpu().clone() for k, v in phi.state_dict().items()}
         best_s1_val: Dict[str, float] = {}
 
@@ -893,7 +923,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
                     gt_per_class=40,
                 )
                 opt_s1.zero_grad(set_to_none=True)
-                cur_gamma_t = gamma_from_raw(raw_gamma)
+                cur_gamma_t = gamma_from_raw(raw_gamma, g_min=g_min_val, g_max=g_max_val)
                 loss, st = compute_unrolled_episode_loss(
                     phi,
                     ep_pack,
@@ -903,6 +933,11 @@ def run_protocol_training(args: argparse.Namespace) -> None:
                     feature_dim=feature_dim,
                     device=device,
                 )
+                if s1_prox_mu > 0.0:
+                    prox_s1 = sum(
+                        torch.sum((p - p0) ** 2) for p, p0 in zip(phi.parameters(), warm_anchor_params)
+                    )
+                    loss = loss + 0.5 * s1_prox_mu * prox_s1
                 loss.backward()
                 allreduce_gradients_gloo(stage1_params, world_size)
                 torch.nn.utils.clip_grad_norm_(stage1_params, max_norm=2.5)
@@ -918,7 +953,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
                 loss_t_cpu.div_(float(world_size))
 
             if rank == 0 and val_evaluator is not None:
-                cur_g = float(gamma_from_raw(raw_gamma).detach().cpu().item())
+                cur_g = float(gamma_from_raw(raw_gamma, g_min=g_min_val, g_max=g_max_val).detach().cpu().item())
                 vm = val_evaluator.evaluate(
                     phi, default_nocollab_hp_t, cur_g, with_collaboration=False, feature_dim=feature_dim, device=device
                 )
@@ -962,7 +997,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
         if rank == 0:
             phi.load_state_dict({k: v.to(device=device) for k, v in best_s1_phi_cpu.items()})
             with torch.no_grad():
-                raw_gamma.fill_(raw_from_gamma(best_s1_gamma))
+                raw_gamma.fill_(raw_from_gamma(best_s1_gamma, g_min=g_min_val, g_max=g_max_val))
             np.save(str(s1_npy_path), default_nocollab_raw_hp)
             s1_ckpt_obj = {
                 "state_dict": best_s1_phi_cpu,
@@ -980,7 +1015,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
                 "elapsed_sec": round(stage1_sec, 2),
             }
             torch.save(s1_ckpt_obj, str(s1_pt_path))
-            if not args.smoke:
+            if not args.smoke and not args.no_provenance:
                 prov_s1 = record_provenance(
                     stage="stage3A_unroll",
                     run_id=f"{protocol}_stage1_nocollab",
@@ -1009,34 +1044,38 @@ def run_protocol_training(args: argparse.Namespace) -> None:
     # Stage 3B: Multi-Agent Dynamic Graph Learning + 10-Step Message Passing Unrolling
     # =========================================================================
     stage2_epochs = 1 if args.smoke else args.stage2_epochs
+    g_min_val, g_max_val = (0.015, 0.30) if protocol == "p1" else (0.025, 0.20)
 
     # Exact Stage-1-diagnosed zero-bias initialization:
     # lambdas = relu(raw_param) + 1e-5 = [3.0e-5, 0.12, 0.075] at init!
     init_excess = torch.tensor([2.0e-5, 0.12 - 1e-5, 0.075 - 1e-5], device=device, dtype=torch.float32)
     log_excess = nn.Parameter(torch.log(init_excess))
 
-    # Safe physically meaningful box in log-excess space so lambda1 stays in [1.2e-5, 2.5e-4],
-    # lambda2 in [0.02, 0.50], lambda3 in [0.01, 0.30] while remaining 100% differentiable
+    # Safe physically meaningful box in log-excess space
     log_min = torch.log(torch.tensor([2.0e-6, 0.02 - 1e-5, 0.01 - 1e-5], device=device, dtype=torch.float32))
-    log_max = torch.log(torch.tensor([2.4e-4, 0.50 - 1e-5, 0.30 - 1e-5], device=device, dtype=torch.float32))
+    if protocol == "p1":
+        log_max = torch.log(torch.tensor([2.4e-4, 1.00 - 1e-5, 1.00 - 1e-5], device=device, dtype=torch.float32))
+    else:
+        log_max = torch.log(torch.tensor([2.4e-4, 0.50 - 1e-5, 0.30 - 1e-5], device=device, dtype=torch.float32))
 
     stage2_params = list(phi.parameters()) + [raw_gamma, log_excess]
     sync_parameters_from_rank0(stage2_params, world_size)
     s1_anchor_params = [p.detach().clone() for p in phi.parameters()]
 
     if protocol == "p1":
-        # Unseen-class meta-generalization (`train_60` -> `val_20`): gentle metric adaptation +
-        # proximal trust-region anchor prevents Neural Collapse on the 60 seen training classes.
+        # Unseen-class meta-generalization (`train_60` -> `val_20`): full-backbone end-to-end
+        # bilevel unrolling with exact query CE and proximal trust-region anchor around Stage A.
         opt_s2 = torch.optim.AdamW(
             [
-                {"params": list(phi.parameters()), "lr": 8.0e-6, "weight_decay": 1e-4},
-                {"params": [raw_gamma], "lr": 3.0e-4, "weight_decay": 0.0},
-                {"params": [log_excess], "lr": 1.2e-3, "weight_decay": 0.0},
+                {"params": list(phi.parameters()), "lr": 3.0e-6, "weight_decay": 1e-4},
+                {"params": [raw_gamma], "lr": 1.5e-2, "weight_decay": 0.0},
+                {"params": [log_excess], "lr": 3.5e-2, "weight_decay": 0.0},
             ]
         )
-        s2_ce_ls = 0.12
-        s2_graph_w = 0.025
-        s2_prox_mu = 0.08
+        s2_ce_ls = 0.0
+        s2_graph_w = 0.08
+        s2_prox_mu = 0.5
+        sched_s2 = torch.optim.lr_scheduler.CosineAnnealingLR(opt_s2, T_max=max(1, stage2_epochs), eta_min=1e-7)
     else:
         opt_s2 = torch.optim.AdamW(
             [
@@ -1048,7 +1087,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
         s2_ce_ls = 0.0
         s2_graph_w = 0.08
         s2_prox_mu = 0.0
-    sched_s2 = torch.optim.lr_scheduler.CosineAnnealingLR(opt_s2, T_max=max(1, stage2_epochs), eta_min=2e-6)
+        sched_s2 = torch.optim.lr_scheduler.CosineAnnealingLR(opt_s2, T_max=max(1, stage2_epochs), eta_min=2e-6)
 
     s2_log_path = out_log_dir / f"{protocol}_stage2_unroll.jsonl"
     if rank == 0 and s2_log_path.exists():
@@ -1056,7 +1095,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
 
     best_s2_score = -1.0
     best_s2_epoch = 0
-    best_s2_gamma = float(gamma_from_raw(raw_gamma).item())
+    best_s2_gamma = float(gamma_from_raw(raw_gamma, g_min=g_min_val, g_max=g_max_val).item())
     best_s2_raw_hp = torch.exp(log_excess).detach().cpu().numpy().astype(np.float32)
     best_s2_phi_cpu = {k: v.detach().cpu().clone() for k, v in phi.state_dict().items()}
     best_s2_val: Dict[str, float] = {}
@@ -1110,7 +1149,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
                 gt_per_class=40,
             )
             opt_s2.zero_grad(set_to_none=True)
-            cur_gamma_t = gamma_from_raw(raw_gamma)
+            cur_gamma_t = gamma_from_raw(raw_gamma, g_min=g_min_val, g_max=g_max_val)
             raw_hp_t = torch.exp(log_excess)
             lambdas_t = torch.relu(raw_hp_t) + 1e-5
 
@@ -1162,7 +1201,7 @@ def run_protocol_training(args: argparse.Namespace) -> None:
             stat_vec.div_(float(world_size))
 
         if rank == 0 and val_evaluator is not None:
-            cur_g = float(gamma_from_raw(raw_gamma).detach().cpu().item())
+            cur_g = float(gamma_from_raw(raw_gamma, g_min=g_min_val, g_max=g_max_val).detach().cpu().item())
             cur_raw_hp = torch.exp(log_excess).detach().cpu().numpy().astype(np.float32)
             cur_eff = (np.maximum(cur_raw_hp, 0.0) + np.float32(1e-5)).tolist()
             vm = val_evaluator.evaluate(
@@ -1409,6 +1448,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--out_log_dir", type=str, default="")
     parser.add_argument("--stage2_only", action="store_true", help="Warmstart Stage 3B from existing Stage 3A ckpt")
     parser.add_argument("--s1_ckpt_override", type=str, default="", help="Optional Stage 3A checkpoint path")
+    parser.add_argument("--warmup_ckpt", type=str, default="", help="Optional 50-epoch supervised CE warmup ckpt")
     parser.add_argument("--no_provenance", action="store_true", help="Skip provenance append during scratch probes")
     parser.add_argument("--smoke", action="store_true", help="1-epoch 8-episode multi-GPU smoke test")
     parser.add_argument("--update_manifest_only", action="store_true")

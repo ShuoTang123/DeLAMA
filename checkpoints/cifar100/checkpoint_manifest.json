@@ -1,44 +1,40 @@
 {
-  "created_at_utc": "2026-11-11T09:56:59Z",
+  "created_at_utc": "2026-11-19T10:26:49Z",
   "feature_dim": 128,
   "protocols": {
     "p1_unseen": {
       "protocol": "p1",
       "feature_dim": 128,
-      "world_size": 8,
+      "world_size": 4,
       "gpu_list": [
         0,
         1,
         2,
-        3,
-        4,
-        5,
-        6,
-        7
+        3
       ],
-      "warmup_epochs": 20,
-      "warmup_sec": 0.0,
-      "peak_vram_mb": 449.69,
+      "warmup_epochs": 50,
+      "warmup_sec": 70.81,
+      "peak_vram_mb": 507.73,
       "stage3A_nocollab": {
         "phi_path": "checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt",
-        "phi_sha256": "10fac95374059da800f1be73160b4ac9ef57152f4bf54ebcab3e220789d0e4d8",
+        "phi_sha256": "01b2a90f883f4fb217bf4821d4ef503cc509d2551b5ba3f19a9e83f4f4459825",
         "param_path": "checkpoints/cifar100/p1_stage1_nocollab_param.npy",
         "param_sha256": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
         "train_log": "results/cifar100/train_logs/p1_stage1_unroll.jsonl",
         "best_epoch": 1,
-        "total_epochs": 48,
+        "total_epochs": 8,
         "episodes_per_epoch": 160,
-        "total_episodes": 7680,
-        "elapsed_sec": 996.92,
-        "gamma": 0.07840976864099503,
+        "total_episodes": 1280,
+        "elapsed_sec": 92.55,
+        "gamma": 0.045233577489852905,
         "val_metrics": {
-          "val_final_acc": 0.5640355558196704,
-          "val_final_acc_std": 0.01533509643203978,
-          "val_aia": 0.37866444426774976,
-          "val_seen_cil_final_acc": 0.5640355558575441,
-          "val_seen_cil_aia": 0.6662749819726399,
-          "val_task_forgetting": 0.14228888922819385,
-          "val_class_forgetting": 0.13716000023080657,
+          "val_final_acc": 0.5864911113182704,
+          "val_final_acc_std": 0.015245626899952215,
+          "val_aia": 0.38500133336583764,
+          "val_seen_cil_final_acc": 0.5864911115358893,
+          "val_seen_cil_aia": 0.6723253150925196,
+          "val_task_forgetting": 0.12418271581193915,
+          "val_class_forgetting": 0.12025111130004128,
           "val_gmse": 0.0,
           "val_final_gmse": 0.0,
           "val_graph_same": 0.0,
@@ -47,41 +43,41 @@
       },
       "stage3B_collab": {
         "phi_path": "checkpoints/cifar100/p1_stage2_collab_phi_d128.pt",
-        "phi_sha256": "ffea1f5cebc32f1b2b892429cc65ce7aaf19d9b9dd21cf1939be8f750e6ce448",
+        "phi_sha256": "56a4ab0db79859da8e5eb8ce1c1b3a0588599adea87bbdce6588402fff0bb6da",
         "param_path": "checkpoints/cifar100/p1_stage2_collab_param.npy",
-        "param_sha256": "f8932abb858cb1d1afde8fc19ad499082595b2915728bea0fb0b04470134a336",
+        "param_sha256": "b29117fb7b95b5559071d87cbbb78d89ee06179e13f6397e23bcc1445d95b028",
         "train_log": "results/cifar100/train_logs/p1_stage2_unroll.jsonl",
-        "best_epoch": 39,
-        "total_epochs": 45,
+        "best_epoch": 9,
+        "total_epochs": 12,
         "episodes_per_epoch": 160,
-        "total_episodes": 7200,
-        "elapsed_sec": 1542.9,
-        "gamma": 0.08337807655334473,
+        "total_episodes": 1920,
+        "elapsed_sec": 329.38,
+        "gamma": 0.030062980949878693,
         "raw_hyper_param": [
-          3.6231725971447304e-05,
-          0.14328055083751678,
-          0.1210881918668747
+          2.0000004496978363e-06,
+          0.4591386020183563,
+          0.7949823141098022
         ],
         "effective_lambdas": {
-          "lambda1": 4.6231725718826056e-05,
-          "lambda2": 0.14329054951667786,
-          "lambda3": 0.12109819054603577
+          "lambda1": 1.2000000424450263e-05,
+          "lambda2": 0.4591486155986786,
+          "lambda3": 0.7949923276901245
         },
         "val_metrics": {
-          "val_final_acc": 0.620286666850249,
-          "val_final_acc_std": 0.017205111392835388,
-          "val_aia": 0.4098699998036026,
-          "val_seen_cil_final_acc": 0.6202866673478857,
-          "val_seen_cil_aia": 0.715498778081675,
-          "val_task_forgetting": 0.1311580248542682,
-          "val_class_forgetting": 0.12408444455545396,
-          "val_gmse": 0.21140099997350556,
-          "val_final_gmse": 0.07296962839408111,
-          "val_graph_same": 0.9865127001553289,
-          "val_final_graph_same": 0.9999965076721827
+          "val_final_acc": 0.6645422250032424,
+          "val_final_acc_std": 0.017559460192859026,
+          "val_aia": 0.4293813338379065,
+          "val_seen_cil_final_acc": 0.6645422228289148,
+          "val_seen_cil_aia": 0.7423929259287554,
+          "val_task_forgetting": 0.11252716028993878,
+          "val_class_forgetting": 0.10655333252996206,
+          "val_gmse": 0.2620472335172916,
+          "val_final_gmse": 0.11327537312763614,
+          "val_graph_same": 0.9515350833020334,
+          "val_final_graph_same": 0.9999953184570668
         },
-        "collab_gain_val_final_acc": 0.056251,
-        "collab_gain_val_seen_cil_aia": 0.049224
+        "collab_gain_val_final_acc": 0.078051,
+        "collab_gain_val_seen_cil_aia": 0.070068
       }
     },
     "p2_imgdisj": {
@@ -164,7 +160,7 @@
     }
   },
   "_provenance": {
-    "timestamp_utc": "2026-11-11T09:56:59Z",
+    "timestamp_utc": "2026-11-19T10:26:49Z",
     "stage": "stage3_manifest",
     "run_id": "stage3_checkpoint_manifest",
     "hostname": "di-20260507172106-sxwmm",
@@ -178,16 +174,21 @@
     ],
     "git": {
       "commit": "c080805b4cc954c03238cd697d3cac2225f9ea24",
-      "dirty_count": 24,
+      "dirty_count": 36,
       "dirty_preview": [
+        " M .gitignore",
+        " M experiments/mapping/lidar_simulation_final/classification_train.py",
         " M results/modern_baselines/EXPERIMENT1_RESULTS.md",
         " M results/scalability/SCALABILITY_RESULTS.md",
         " M src/classification_dataset.py",
         " M src/classification_v2.py",
         " M src/graph_algorithms.py",
+        " M src/lifelong_baselines/lifelong_learning.py",
+        " M src/lifelong_baselines/test.py",
         " M src/lm_delama/data.py",
         " M src/lm_delama/delama_lm.py",
         " M src/lm_delama/episodes.py",
+        " M src/lm_delama/tiny_gpt.py",
         " M src/modern_baselines/base.py",
         " M src/modern_baselines/codec.py",
         " M src/modern_baselines/dadpfl.py",
@@ -195,15 +196,16 @@
         " M src/modern_baselines/delama_wrapper.py",
         " M src/modern_baselines/dpfl.py",
         " M src/modern_baselines/metrics.py",
+        " M src/modern_baselines/ofcl.py",
         " M src/modern_baselines/runner.py",
         " M src/nonlinear_regression.py",
         " M src/utils.py",
         " M tools/summarize_scalability.py",
+        "?? .vscode/",
+        "?? archive/p1_20ep_backup_20261119/",
         "?? docs/",
         "?? experiments/cifar100/",
-        "?? experiments/cifar100_pilot/",
-        "?? src/modern_baselines/classic_graphs.py",
-        "?? tools/summarize_schemeA.py"
+        "?? experiments/cifar100_pilot/"
       ]
     },
     "config": {
@@ -217,19 +219,19 @@
       "data/core/cifar100_splits/split_manifest.json": "aa407445b59894c44c0ececfce4b9bc2d6007fc5e1cf12a0562c1bfc899b3cf4"
     },
     "outputs_sha256": {
-      "checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt": "10fac95374059da800f1be73160b4ac9ef57152f4bf54ebcab3e220789d0e4d8",
+      "checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt": "01b2a90f883f4fb217bf4821d4ef503cc509d2551b5ba3f19a9e83f4f4459825",
       "checkpoints/cifar100/p1_stage1_nocollab_param.npy": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
-      "checkpoints/cifar100/p1_stage2_collab_phi_d128.pt": "ffea1f5cebc32f1b2b892429cc65ce7aaf19d9b9dd21cf1939be8f750e6ce448",
-      "checkpoints/cifar100/p1_stage2_collab_param.npy": "f8932abb858cb1d1afde8fc19ad499082595b2915728bea0fb0b04470134a336",
+      "checkpoints/cifar100/p1_stage2_collab_phi_d128.pt": "56a4ab0db79859da8e5eb8ce1c1b3a0588599adea87bbdce6588402fff0bb6da",
+      "checkpoints/cifar100/p1_stage2_collab_param.npy": "b29117fb7b95b5559071d87cbbb78d89ee06179e13f6397e23bcc1445d95b028",
       "checkpoints/cifar100/p2_stage1_nocollab_phi_d128.pt": "ea859fd816ad67060d7d6814e0264a2cac412f56f0cfd510ce9a1d3532903d96",
       "checkpoints/cifar100/p2_stage1_nocollab_param.npy": "7d8347ca8a8d4f0191f212665ab59c25690efd54eaa7ecaca11c19ff5faa0c07",
       "checkpoints/cifar100/p2_stage2_collab_phi_d128.pt": "87db505ac3771b2f85ee25bceed90b3478cdeb1385ee2a0d432c3eeeaa3aa921",
       "checkpoints/cifar100/p2_stage2_collab_param.npy": "ee115cad322b401ea155351eae9493d65bbb4f9f168d75025472b379fdaa8dff",
-      "checkpoints/cifar100/checkpoint_manifest.json": "80e023e0580a484e8c9017770383645f805a364efd6a50cd17b09e7dd46db2e3"
+      "checkpoints/cifar100/checkpoint_manifest.json": "2ed26598527241bc1cbef7cdb9f6658de7f6a9c81b619a0d6b80fd32d94c2e2d"
     },
     "metrics_summary": {
-      "p1_s3a_val_final": 0.5640355558196704,
-      "p1_s3b_val_final": 0.620286666850249,
+      "p1_s3a_val_final": 0.5864911113182704,
+      "p1_s3b_val_final": 0.6645422250032424,
       "p2_s3a_val_final": 0.6389777779579162,
       "p2_s3b_val_final": 0.6842555561661721
     },

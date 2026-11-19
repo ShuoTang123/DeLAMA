@@ -2,120 +2,120 @@
   "split_cifar100_p1": {
     "N6": {
       "DeLAMA": {
-        "final_acc_pct": 59.52,
-        "seen_cil_aia_pct": 70.14,
-        "total_comm_mb": 8.1,
-        "wall_clock_sec": 0.15
+        "final_acc_pct": 66.12,
+        "seen_cil_aia_pct": 74.66,
+        "total_comm_mb": 8.99,
+        "wall_clock_sec": 0.13
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 59.88,
-        "seen_cil_aia_pct": 70.19,
-        "total_comm_mb": 2.22,
-        "wall_clock_sec": 0.14
+        "final_acc_pct": 65.11,
+        "seen_cil_aia_pct": 73.69,
+        "total_comm_mb": 2.31,
+        "wall_clock_sec": 0.12
       },
       "DeLAMA-MP3": {
-        "final_acc_pct": 59.49,
-        "seen_cil_aia_pct": 70.05,
-        "total_comm_mb": 3.53,
-        "wall_clock_sec": 0.14
+        "final_acc_pct": 65.9,
+        "seen_cil_aia_pct": 74.45,
+        "total_comm_mb": 3.8,
+        "wall_clock_sec": 0.12
       },
       "DeLAMA-WC": {
-        "final_acc_pct": 53.69,
-        "seen_cil_aia_pct": 64.55,
+        "final_acc_pct": 57.91,
+        "seen_cil_aia_pct": 66.97,
         "total_comm_mb": 0.0,
-        "wall_clock_sec": 0.1
+        "wall_clock_sec": 0.08
       },
       "DeLAMA-Oracle": {
-        "final_acc_pct": 59.7,
-        "seen_cil_aia_pct": 70.63,
+        "final_acc_pct": 66.17,
+        "seen_cil_aia_pct": 75.37,
         "total_comm_mb": 7.74,
-        "wall_clock_sec": 0.14
+        "wall_clock_sec": 0.11
       },
       "AFCL": {
-        "final_acc_pct": 51.39,
-        "seen_cil_aia_pct": 63.9,
-        "total_comm_mb": 27.94,
-        "wall_clock_sec": 21.29
+        "final_acc_pct": 55.22,
+        "seen_cil_aia_pct": 66.6,
+        "total_comm_mb": 29.03,
+        "wall_clock_sec": 14.13
       },
       "ACIL": {
-        "final_acc_pct": 53.66,
-        "seen_cil_aia_pct": 64.47,
+        "final_acc_pct": 57.82,
+        "seen_cil_aia_pct": 67.59,
         "total_comm_mb": 0.0,
-        "wall_clock_sec": 0.07
+        "wall_clock_sec": 0.08
       },
       "Analytic-FCL": {
-        "final_acc_pct": 50.05,
-        "seen_cil_aia_pct": 62.44,
+        "final_acc_pct": 54.65,
+        "seen_cil_aia_pct": 66.03,
         "total_comm_mb": 4.61,
-        "wall_clock_sec": 0.05
+        "wall_clock_sec": 0.07
       }
     },
     "N12": {
       "DeLAMA": {
-        "final_acc_pct": 62.65,
-        "seen_cil_aia_pct": 72.54
+        "final_acc_pct": 68.68,
+        "seen_cil_aia_pct": 76.68
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 62.56,
-        "seen_cil_aia_pct": 72.07
+        "final_acc_pct": 68.11,
+        "seen_cil_aia_pct": 76.08
       },
       "DeLAMA-MP3": {
-        "final_acc_pct": 62.47,
-        "seen_cil_aia_pct": 72.25
+        "final_acc_pct": 68.42,
+        "seen_cil_aia_pct": 76.47
       },
       "DeLAMA-WC": {
-        "final_acc_pct": 53.99,
-        "seen_cil_aia_pct": 64.51
+        "final_acc_pct": 58.02,
+        "seen_cil_aia_pct": 66.7
       },
       "DeLAMA-Oracle": {
-        "final_acc_pct": 62.91,
-        "seen_cil_aia_pct": 73.29
+        "final_acc_pct": 68.78,
+        "seen_cil_aia_pct": 77.62
       },
       "AFCL": {
-        "final_acc_pct": 55.24,
-        "seen_cil_aia_pct": 67.5
+        "final_acc_pct": 59.1,
+        "seen_cil_aia_pct": 70.34
       },
       "ACIL": {
-        "final_acc_pct": 53.98,
-        "seen_cil_aia_pct": 64.42
+        "final_acc_pct": 57.93,
+        "seen_cil_aia_pct": 67.36
       },
       "Analytic-FCL": {
-        "final_acc_pct": 53.14,
-        "seen_cil_aia_pct": 65.13
+        "final_acc_pct": 57.65,
+        "seen_cil_aia_pct": 68.63
       }
     },
     "N24": {
       "DeLAMA": {
-        "final_acc_pct": 64.57,
-        "seen_cil_aia_pct": 73.96
+        "final_acc_pct": 70.07,
+        "seen_cil_aia_pct": 77.53
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 64.23,
-        "seen_cil_aia_pct": 73.2
+        "final_acc_pct": 69.73,
+        "seen_cil_aia_pct": 77.24
       },
       "DeLAMA-MP3": {
-        "final_acc_pct": 64.4,
-        "seen_cil_aia_pct": 73.63
+        "final_acc_pct": 69.95,
+        "seen_cil_aia_pct": 77.54
       },
       "DeLAMA-WC": {
-        "final_acc_pct": 53.9,
-        "seen_cil_aia_pct": 64.18
+        "final_acc_pct": 57.93,
+        "seen_cil_aia_pct": 66.35
       },
       "DeLAMA-Oracle": {
-        "final_acc_pct": 64.77,
-        "seen_cil_aia_pct": 74.65
+        "final_acc_pct": 70.18,
+        "seen_cil_aia_pct": 78.59
       },
       "AFCL": {
-        "final_acc_pct": 58.03,
-        "seen_cil_aia_pct": 70.14
+        "final_acc_pct": 61.8,
+        "seen_cil_aia_pct": 72.82
       },
       "ACIL": {
-        "final_acc_pct": 53.91,
-        "seen_cil_aia_pct": 64.14
+        "final_acc_pct": 57.85,
+        "seen_cil_aia_pct": 67.0
       },
       "Analytic-FCL": {
-        "final_acc_pct": 54.63,
-        "seen_cil_aia_pct": 66.61
+        "final_acc_pct": 59.33,
+        "seen_cil_aia_pct": 70.42
       }
     }
   },
@@ -204,110 +204,110 @@
     },
     "phi_solo": {
       "GEM": {
-        "final_acc_pct": 52.1,
-        "seen_cil_aia_pct": 59.7
+        "final_acc_pct": 56.35,
+        "seen_cil_aia_pct": 60.62
       },
       "pFedGraph": {
-        "final_acc_pct": 51.36,
-        "seen_cil_aia_pct": 63.96
+        "final_acc_pct": 58.98,
+        "seen_cil_aia_pct": 67.0
       },
       "DisPFL": {
-        "final_acc_pct": 23.09,
-        "seen_cil_aia_pct": 44.9
+        "final_acc_pct": 25.0,
+        "seen_cil_aia_pct": 47.05
       },
       "DFedAvgM": {
-        "final_acc_pct": 24.35,
-        "seen_cil_aia_pct": 45.66
+        "final_acc_pct": 28.07,
+        "seen_cil_aia_pct": 50.0
       },
       "Online-FCL": {
-        "final_acc_pct": 37.81,
-        "seen_cil_aia_pct": 56.23
+        "final_acc_pct": 40.34,
+        "seen_cil_aia_pct": 57.91
       },
       "DPFL-BGGC": {
-        "final_acc_pct": 35.8,
-        "seen_cil_aia_pct": 57.98
+        "final_acc_pct": 47.18,
+        "seen_cil_aia_pct": 62.76
       },
       "L2C": {
-        "final_acc_pct": 40.65,
-        "seen_cil_aia_pct": 58.23
+        "final_acc_pct": 46.88,
+        "seen_cil_aia_pct": 61.27
       },
       "AFCL": {
-        "final_acc_pct": 51.74,
-        "seen_cil_aia_pct": 64.65
+        "final_acc_pct": 55.46,
+        "seen_cil_aia_pct": 66.65
       },
       "Analytic-FCL": {
-        "final_acc_pct": 50.31,
-        "seen_cil_aia_pct": 62.89
+        "final_acc_pct": 54.65,
+        "seen_cil_aia_pct": 66.03
       },
       "ACIL": {
-        "final_acc_pct": 54.2,
-        "seen_cil_aia_pct": 65.08
+        "final_acc_pct": 57.83,
+        "seen_cil_aia_pct": 67.59
       },
       "DeLAMA-WC": {
-        "final_acc_pct": 54.09,
-        "seen_cil_aia_pct": 65.09
+        "final_acc_pct": 58.01,
+        "seen_cil_aia_pct": 67.37
       },
       "DeLAMA": {
-        "final_acc_pct": 59.17,
-        "seen_cil_aia_pct": 69.91
+        "final_acc_pct": 64.28,
+        "seen_cil_aia_pct": 73.06
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 59.48,
-        "seen_cil_aia_pct": 69.96
+        "final_acc_pct": 64.39,
+        "seen_cil_aia_pct": 72.9
       }
     },
     "phi_unroll": {
       "GEM": {
-        "final_acc_pct": 51.37,
-        "seen_cil_aia_pct": 58.27
+        "final_acc_pct": 56.37,
+        "seen_cil_aia_pct": 60.66
       },
       "pFedGraph": {
-        "final_acc_pct": 41.08,
-        "seen_cil_aia_pct": 60.46
+        "final_acc_pct": 58.97,
+        "seen_cil_aia_pct": 67.01
       },
       "DisPFL": {
-        "final_acc_pct": 23.39,
-        "seen_cil_aia_pct": 44.75
+        "final_acc_pct": 24.92,
+        "seen_cil_aia_pct": 47.0
       },
       "DFedAvgM": {
-        "final_acc_pct": 24.82,
-        "seen_cil_aia_pct": 46.05
+        "final_acc_pct": 28.19,
+        "seen_cil_aia_pct": 50.06
       },
       "Online-FCL": {
-        "final_acc_pct": 37.39,
-        "seen_cil_aia_pct": 55.43
+        "final_acc_pct": 40.28,
+        "seen_cil_aia_pct": 57.83
       },
       "DPFL-BGGC": {
-        "final_acc_pct": 37.69,
-        "seen_cil_aia_pct": 58.0
+        "final_acc_pct": 46.95,
+        "seen_cil_aia_pct": 62.65
       },
       "L2C": {
-        "final_acc_pct": 41.14,
-        "seen_cil_aia_pct": 57.91
+        "final_acc_pct": 46.87,
+        "seen_cil_aia_pct": 61.26
       },
       "AFCL": {
-        "final_acc_pct": 51.39,
-        "seen_cil_aia_pct": 63.9
+        "final_acc_pct": 55.22,
+        "seen_cil_aia_pct": 66.6
       },
       "Analytic-FCL": {
-        "final_acc_pct": 50.05,
-        "seen_cil_aia_pct": 62.44
+        "final_acc_pct": 54.65,
+        "seen_cil_aia_pct": 66.03
       },
       "ACIL": {
-        "final_acc_pct": 53.66,
-        "seen_cil_aia_pct": 64.47
+        "final_acc_pct": 57.82,
+        "seen_cil_aia_pct": 67.59
       },
       "DeLAMA-WC": {
-        "final_acc_pct": 53.69,
-        "seen_cil_aia_pct": 64.55
+        "final_acc_pct": 57.91,
+        "seen_cil_aia_pct": 66.97
       },
       "DeLAMA": {
-        "final_acc_pct": 59.52,
-        "seen_cil_aia_pct": 70.14
+        "final_acc_pct": 66.12,
+        "seen_cil_aia_pct": 74.66
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 59.88,
-        "seen_cil_aia_pct": 70.19
+        "final_acc_pct": 65.11,
+        "seen_cil_aia_pct": 73.69
       }
     }
   },
@@ -336,316 +336,316 @@
   "hardening_controls": {
     "suite_a_N12_Ring2": {
       "DeLAMA-WC": {
-        "final_acc_pct": 53.99,
+        "final_acc_pct": 58.02,
         "hops_mean": 0.0,
         "total_comm_mb": 0.0,
         "mesh_sec_mean": 0.0
       },
       "DeLAMA": {
-        "final_acc_pct": 57.03,
+        "final_acc_pct": 60.25,
         "hops_mean": 710.0,
-        "total_comm_mb": 13.52,
+        "total_comm_mb": 13.63,
         "mesh_sec_mean": 8.02
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 53.82,
+        "final_acc_pct": 49.38,
         "hops_mean": 620.0,
-        "total_comm_mb": 2.48,
+        "total_comm_mb": 2.49,
         "mesh_sec_mean": 6.38
       },
       "DeLAMA-LocalDA": {
-        "final_acc_pct": 56.61,
+        "final_acc_pct": 62.6,
         "hops_mean": 120.0,
-        "total_comm_mb": 11.74,
+        "total_comm_mb": 12.07,
         "mesh_sec_mean": 2.1
       },
       "DeLAMA-LocalDA-MP1": {
-        "final_acc_pct": 56.73,
+        "final_acc_pct": 59.45,
         "hops_mean": 30.0,
-        "total_comm_mb": 2.29,
+        "total_comm_mb": 2.32,
         "mesh_sec_mean": 0.46
       }
     },
     "suite_a_N24_Ring2": {
       "DeLAMA-WC": {
-        "final_acc_pct": 53.9,
+        "final_acc_pct": 57.93,
         "hops_mean": 0.0,
         "total_comm_mb": 0.0,
         "mesh_sec_mean": 0.0
       },
       "DeLAMA": {
-        "final_acc_pct": 55.79,
+        "final_acc_pct": 59.15,
         "hops_mean": 1310.0,
         "total_comm_mb": 27.28,
         "mesh_sec_mean": 14.04
       },
       "DeLAMA-MP1": {
-        "final_acc_pct": 48.13,
+        "final_acc_pct": 46.06,
         "hops_mean": 1220.0,
         "total_comm_mb": 4.99,
         "mesh_sec_mean": 12.4
       },
       "DeLAMA-LocalDA": {
-        "final_acc_pct": 56.68,
+        "final_acc_pct": 62.92,
         "hops_mean": 120.0,
-        "total_comm_mb": 23.66,
+        "total_comm_mb": 24.34,
         "mesh_sec_mean": 2.11
       },
       "DeLAMA-LocalDA-MP1": {
-        "final_acc_pct": 56.84,
+        "final_acc_pct": 59.79,
         "hops_mean": 30.0,
-        "total_comm_mb": 4.6,
+        "total_comm_mb": 4.66,
         "mesh_sec_mean": 0.47
       }
     },
     "suite_b_regimes": {
       "P1-Asym-G2 (9+3)": {
         "DeLAMA-WC": {
-          "final_acc_pct": 53.86,
-          "minority_acc_pct": 53.44
+          "final_acc_pct": 57.92,
+          "minority_acc_pct": 57.38
         },
         "ACIL": {
-          "final_acc_pct": 53.91,
-          "minority_acc_pct": 53.47
+          "final_acc_pct": 57.84,
+          "minority_acc_pct": 57.28
         },
         "Analytic-FCL": {
-          "final_acc_pct": 56.35,
-          "minority_acc_pct": 33.91
+          "final_acc_pct": 60.55,
+          "minority_acc_pct": 38.95
         },
         "AFCL": {
-          "final_acc_pct": 55.9,
-          "minority_acc_pct": 42.6
+          "final_acc_pct": 59.9,
+          "minority_acc_pct": 47.5
         },
         "DeLAMA-StaticFirst": {
-          "final_acc_pct": 61.04,
-          "minority_acc_pct": 55.64
+          "final_acc_pct": 64.18,
+          "minority_acc_pct": 50.68
         },
         "DeLAMA": {
-          "final_acc_pct": 62.19,
-          "minority_acc_pct": 58.28
+          "final_acc_pct": 68.39,
+          "minority_acc_pct": 64.78
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 61.98,
-          "minority_acc_pct": 58.58
+          "final_acc_pct": 67.85,
+          "minority_acc_pct": 64.01
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 62.26,
-          "minority_acc_pct": 60.59
+          "final_acc_pct": 67.9,
+          "minority_acc_pct": 64.15
         }
       },
       "P1-Bal-G3 (4+4+4)": {
         "DeLAMA-WC": {
-          "final_acc_pct": 63.24,
-          "minority_acc_pct": 63.05
+          "final_acc_pct": 65.24,
+          "minority_acc_pct": 64.92
         },
         "ACIL": {
-          "final_acc_pct": 63.12,
-          "minority_acc_pct": 62.97
+          "final_acc_pct": 66.46,
+          "minority_acc_pct": 66.09
         },
         "Analytic-FCL": {
-          "final_acc_pct": 54.85,
-          "minority_acc_pct": 54.43
+          "final_acc_pct": 59.0,
+          "minority_acc_pct": 58.42
         },
         "AFCL": {
-          "final_acc_pct": 61.18,
-          "minority_acc_pct": 60.78
+          "final_acc_pct": 64.8,
+          "minority_acc_pct": 64.62
         },
         "DeLAMA-StaticFirst": {
-          "final_acc_pct": 65.99,
-          "minority_acc_pct": 65.62
+          "final_acc_pct": 64.75,
+          "minority_acc_pct": 64.22
         },
         "DeLAMA": {
-          "final_acc_pct": 69.36,
-          "minority_acc_pct": 69.08
+          "final_acc_pct": 69.09,
+          "minority_acc_pct": 68.53
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 70.41,
-          "minority_acc_pct": 70.11
+          "final_acc_pct": 73.15,
+          "minority_acc_pct": 72.66
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 70.51,
-          "minority_acc_pct": 70.19
+          "final_acc_pct": 73.62,
+          "minority_acc_pct": 73.1
         }
       },
       "P1-Asym-G3 (6+4+2)": {
         "DeLAMA-WC": {
-          "final_acc_pct": 63.06,
-          "minority_acc_pct": 62.86
+          "final_acc_pct": 65.02,
+          "minority_acc_pct": 64.54
         },
         "ACIL": {
-          "final_acc_pct": 62.97,
-          "minority_acc_pct": 62.77
+          "final_acc_pct": 66.17,
+          "minority_acc_pct": 65.64
         },
         "Analytic-FCL": {
-          "final_acc_pct": 57.26,
-          "minority_acc_pct": 39.12
+          "final_acc_pct": 61.3,
+          "minority_acc_pct": 43.42
         },
         "AFCL": {
-          "final_acc_pct": 61.74,
-          "minority_acc_pct": 51.03
+          "final_acc_pct": 64.93,
+          "minority_acc_pct": 54.16
         },
         "DeLAMA-StaticFirst": {
-          "final_acc_pct": 66.86,
-          "minority_acc_pct": 61.71
+          "final_acc_pct": 66.13,
+          "minority_acc_pct": 53.54
         },
         "DeLAMA": {
-          "final_acc_pct": 70.17,
-          "minority_acc_pct": 66.21
+          "final_acc_pct": 70.76,
+          "minority_acc_pct": 61.74
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 70.62,
-          "minority_acc_pct": 66.98
+          "final_acc_pct": 73.35,
+          "minority_acc_pct": 65.82
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 70.43,
-          "minority_acc_pct": 66.61
+          "final_acc_pct": 73.37,
+          "minority_acc_pct": 65.14
         }
       },
       "P1-Bal-G4 (3+3+3+3)": {
         "DeLAMA-WC": {
-          "final_acc_pct": 70.99,
-          "minority_acc_pct": 71.14
+          "final_acc_pct": 71.27,
+          "minority_acc_pct": 71.27
         },
         "ACIL": {
-          "final_acc_pct": 71.21,
-          "minority_acc_pct": 71.34
+          "final_acc_pct": 73.69,
+          "minority_acc_pct": 73.68
         },
         "Analytic-FCL": {
-          "final_acc_pct": 55.44,
-          "minority_acc_pct": 55.2
+          "final_acc_pct": 59.2,
+          "minority_acc_pct": 59.27
         },
         "AFCL": {
-          "final_acc_pct": 67.19,
-          "minority_acc_pct": 67.44
+          "final_acc_pct": 70.56,
+          "minority_acc_pct": 70.39
         },
         "DeLAMA-StaticFirst": {
-          "final_acc_pct": 71.76,
-          "minority_acc_pct": 71.85
+          "final_acc_pct": 68.28,
+          "minority_acc_pct": 68.4
         },
         "DeLAMA": {
-          "final_acc_pct": 73.15,
-          "minority_acc_pct": 73.22
+          "final_acc_pct": 70.48,
+          "minority_acc_pct": 70.56
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 74.44,
-          "minority_acc_pct": 74.53
+          "final_acc_pct": 74.21,
+          "minority_acc_pct": 74.38
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 74.56,
-          "minority_acc_pct": 74.67
+          "final_acc_pct": 75.0,
+          "minority_acc_pct": 75.09
         }
       },
       "P1-LinkDrop-30%": {
         "DeLAMA-WC": {
-          "final_acc_pct": 53.99,
-          "minority_acc_pct": 54.11
+          "final_acc_pct": 58.02,
+          "minority_acc_pct": 58.13
         },
         "ACIL": {
-          "final_acc_pct": 53.98,
-          "minority_acc_pct": 54.07
+          "final_acc_pct": 57.93,
+          "minority_acc_pct": 58.03
         },
         "Analytic-FCL": {
-          "final_acc_pct": 53.14,
-          "minority_acc_pct": 52.97
+          "final_acc_pct": 57.65,
+          "minority_acc_pct": 57.6
         },
         "AFCL": {
-          "final_acc_pct": 54.83,
-          "minority_acc_pct": 54.84
+          "final_acc_pct": 58.78,
+          "minority_acc_pct": 58.8
         },
         "DeLAMA-StaticFirst": {
-          "final_acc_pct": 59.64,
-          "minority_acc_pct": 59.84
+          "final_acc_pct": 60.57,
+          "minority_acc_pct": 60.72
         },
         "DeLAMA": {
-          "final_acc_pct": 62.43,
-          "minority_acc_pct": 62.44
+          "final_acc_pct": 68.56,
+          "minority_acc_pct": 68.71
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 61.99,
-          "minority_acc_pct": 62.0
+          "final_acc_pct": 66.82,
+          "minority_acc_pct": 66.87
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 61.6,
-          "minority_acc_pct": 61.58
+          "final_acc_pct": 66.85,
+          "minority_acc_pct": 66.88
         }
       },
       "P1-LinkDrop-50%": {
         "DeLAMA-WC": {
-          "final_acc_pct": 53.99,
-          "minority_acc_pct": 54.11
+          "final_acc_pct": 58.02,
+          "minority_acc_pct": 58.13
         },
         "ACIL": {
-          "final_acc_pct": 53.98,
-          "minority_acc_pct": 54.07
+          "final_acc_pct": 57.93,
+          "minority_acc_pct": 58.03
         },
         "Analytic-FCL": {
-          "final_acc_pct": 53.14,
-          "minority_acc_pct": 52.97
+          "final_acc_pct": 57.65,
+          "minority_acc_pct": 57.6
         },
         "AFCL": {
-          "final_acc_pct": 54.42,
-          "minority_acc_pct": 54.5
+          "final_acc_pct": 58.61,
+          "minority_acc_pct": 58.69
         },
         "DeLAMA-StaticFirst": {
-          "final_acc_pct": 58.97,
-          "minority_acc_pct": 59.3
+          "final_acc_pct": 59.93,
+          "minority_acc_pct": 60.38
         },
         "DeLAMA": {
-          "final_acc_pct": 61.67,
-          "minority_acc_pct": 61.77
+          "final_acc_pct": 67.19,
+          "minority_acc_pct": 67.4
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 60.98,
-          "minority_acc_pct": 61.01
+          "final_acc_pct": 64.65,
+          "minority_acc_pct": 64.68
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 60.28,
-          "minority_acc_pct": 60.3
+          "final_acc_pct": 64.89,
+          "minority_acc_pct": 65.01
         }
       },
       "P1-MidShift-t6": {
         "DeLAMA-WC": {
-          "final_acc_pct": 51.56,
-          "minority_acc_pct": 51.71
-        },
-        "ACIL": {
-          "final_acc_pct": 51.65,
-          "minority_acc_pct": 51.77
-        },
-        "Analytic-FCL": {
-          "final_acc_pct": 50.89,
-          "minority_acc_pct": 57.08
-        },
-        "AFCL": {
-          "final_acc_pct": 53.37,
-          "minority_acc_pct": 56.45
-        },
-        "DeLAMA-StaticFirst": {
-          "final_acc_pct": 55.02,
+          "final_acc_pct": 55.72,
           "minority_acc_pct": 55.87
         },
+        "ACIL": {
+          "final_acc_pct": 55.64,
+          "minority_acc_pct": 55.79
+        },
+        "Analytic-FCL": {
+          "final_acc_pct": 55.89,
+          "minority_acc_pct": 61.96
+        },
+        "AFCL": {
+          "final_acc_pct": 57.43,
+          "minority_acc_pct": 60.63
+        },
+        "DeLAMA-StaticFirst": {
+          "final_acc_pct": 57.52,
+          "minority_acc_pct": 61.35
+        },
         "DeLAMA": {
-          "final_acc_pct": 57.75,
-          "minority_acc_pct": 57.84
+          "final_acc_pct": 62.19,
+          "minority_acc_pct": 62.67
         },
         "DeLAMA-MP1": {
-          "final_acc_pct": 58.08,
-          "minority_acc_pct": 58.2
+          "final_acc_pct": 63.2,
+          "minority_acc_pct": 63.39
         },
         "DeLAMA-LocalDA-MP1": {
-          "final_acc_pct": 58.21,
-          "minority_acc_pct": 58.31
+          "final_acc_pct": 63.39,
+          "minority_acc_pct": 63.65
         }
       }
     },
     "suite_c_diagnostics": {
-      "rho_mean": 0.8528453760147094,
-      "rho_std": 0.018230033393021643,
-      "rho_max": 0.9067356586456299,
-      "w5_vs_wstar_frob_mean": 0.0011548985844251406,
-      "w5_vs_wstar_frob_max": 0.11223622411489487,
-      "prune_tau_frob_mean": 4.210754770792846e-05,
-      "prune_tau_frob_max": 0.00019652015180326998
+      "rho_mean": 0.981597994863987,
+      "rho_std": 0.0028858624201827834,
+      "rho_max": 0.9890791773796082,
+      "w5_vs_wstar_frob_mean": 0.0011684692166275426,
+      "w5_vs_wstar_frob_max": 0.12647680938243866,
+      "prune_tau_frob_mean": 6.70618931435456e-05,
+      "prune_tau_frob_max": 0.00022317157709039748
     },
     "suite_c_rows": [
       {
@@ -653,81 +653,81 @@
         "K_outer": 1,
         "M1": 5,
         "M2": 1,
-        "final_acc_mean": 0.5987783335645993,
-        "final_gmse_mean": 0.06156693980097771,
-        "final_graph_same_mean": 0.999996240735054,
-        "total_comm_mb": 2.2243271999999994,
-        "gap_to_exact_1pass_l2inf": 0.4064702609181404,
-        "gap_to_biconvex_l2inf": 0.4314119294285774
+        "final_acc_mean": 0.651056666870912,
+        "final_gmse_mean": 0.08153469572309405,
+        "final_graph_same_mean": 0.9999951195716857,
+        "total_comm_mb": 2.313492,
+        "gap_to_exact_1pass_l2inf": 1.1665545403957367,
+        "gap_to_biconvex_l2inf": 1.1689761364459992
       },
       {
         "name": "DeLAMA-MP3",
         "K_outer": 1,
         "M1": 5,
         "M2": 3,
-        "final_acc_mean": 0.5949150002002717,
-        "final_gmse_mean": 0.06156693980097771,
-        "final_graph_same_mean": 0.999996240735054,
-        "total_comm_mb": 3.5289816000000007,
-        "gap_to_exact_1pass_l2inf": 0.10975307919085026,
-        "gap_to_biconvex_l2inf": 0.1399660874158144
+        "final_acc_mean": 0.6589833326141039,
+        "final_gmse_mean": 0.08153469572309405,
+        "final_graph_same_mean": 0.9999951195716857,
+        "total_comm_mb": 3.796476,
+        "gap_to_exact_1pass_l2inf": 0.6015438848733902,
+        "gap_to_biconvex_l2inf": 0.6158528900146485
       },
       {
         "name": "DeLAMA",
         "K_outer": 1,
         "M1": 5,
         "M2": 10,
-        "final_acc_mean": 0.5952049984037876,
-        "final_gmse_mean": 0.06156693980097771,
-        "final_graph_same_mean": 0.999996240735054,
-        "total_comm_mb": 8.095272,
-        "gap_to_exact_1pass_l2inf": 0.014271818967536092,
-        "gap_to_biconvex_l2inf": 0.08385073823854328
+        "final_acc_mean": 0.6612400008241334,
+        "final_gmse_mean": 0.08153469572309405,
+        "final_graph_same_mean": 0.9999951195716857,
+        "total_comm_mb": 8.98692,
+        "gap_to_exact_1pass_l2inf": 0.3513275384902954,
+        "gap_to_biconvex_l2inf": 0.35131584882736205
       },
       {
         "name": "Exact-1Pass",
         "K_outer": 1,
         "M1": 50,
         "M2": "Exact",
-        "final_acc_mean": 0.5953449984888235,
-        "final_gmse_mean": 0.06156694465316832,
-        "final_graph_same_mean": 0.9999962419271469,
+        "final_acc_mean": 0.6629983338713646,
+        "final_gmse_mean": 0.08153469837736338,
+        "final_graph_same_mean": 0.9999951255321503,
         "total_comm_mb": null,
         "gap_to_exact_1pass_l2inf": 0.0,
-        "gap_to_biconvex_l2inf": 0.08328281117603183
+        "gap_to_biconvex_l2inf": 0.07173124328255653
       },
       {
         "name": "Alt-2Pass",
         "K_outer": 2,
         "M1": 5,
         "M2": 10,
-        "final_acc_mean": 0.5965666668117047,
-        "final_gmse_mean": 0.008704579520854168,
-        "final_graph_same_mean": 0.9999977719783782,
-        "total_comm_mb": 15.962472,
-        "gap_to_exact_1pass_l2inf": 0.06312967254780233,
-        "gap_to_biconvex_l2inf": 0.020329637415707112
+        "final_acc_mean": 0.6625183317065239,
+        "final_gmse_mean": 0.00023044636221129623,
+        "final_graph_same_mean": 0.9999977254867554,
+        "total_comm_mb": 18.3918,
+        "gap_to_exact_1pass_l2inf": 0.24185752838850022,
+        "gap_to_biconvex_l2inf": 0.23129579231142997
       },
       {
         "name": "Alt-5Pass",
         "K_outer": 5,
         "M1": 5,
         "M2": 10,
-        "final_acc_mean": 0.5969800005853176,
-        "final_gmse_mean": 0.001507890622888226,
-        "final_graph_same_mean": 0.9999977964162826,
-        "total_comm_mb": 39.198744000000005,
-        "gap_to_exact_1pass_l2inf": 0.08295120727270841,
-        "gap_to_biconvex_l2inf": 0.00033738230109520373
+        "final_acc_mean": 0.663246666888396,
+        "final_gmse_mean": 7.819535046564851e-06,
+        "final_graph_same_mean": 0.9999978822469712,
+        "total_comm_mb": 46.759176,
+        "gap_to_exact_1pass_l2inf": 0.11156483247876167,
+        "gap_to_biconvex_l2inf": 0.08544333815574646
       },
       {
         "name": "Biconvex-Conv",
         "K_outer": 20,
         "M1": 50,
         "M2": "Exact",
-        "final_acc_mean": 0.5969866672158242,
-        "final_gmse_mean": 0.0014409543744113762,
-        "final_graph_same_mean": 0.9999978029727936,
+        "final_acc_mean": 0.66350666731596,
+        "final_gmse_mean": 7.664978308241644e-06,
+        "final_graph_same_mean": 0.9999979436397552,
         "total_comm_mb": null,
         "gap_to_exact_1pass_l2inf": 0.0,
         "gap_to_biconvex_l2inf": 0.0
@@ -754,8 +754,8 @@
             "total_comm_mb": 77.4
           },
           "DPFL-BGGC": {
-            "final_acc_pct": 46.35,
-            "seen_cil_aia_pct": 59.84,
+            "final_acc_pct": 46.37,
+            "seen_cil_aia_pct": 59.85,
             "total_comm_mb": 77.4
           },
           "L2C": {
@@ -801,64 +801,64 @@
         },
         "phi_unroll": {
           "GEM": {
-            "final_acc_pct": 43.68,
-            "seen_cil_aia_pct": 57.74,
+            "final_acc_pct": 49.03,
+            "seen_cil_aia_pct": 61.23,
             "total_comm_mb": 0.0
           },
           "pFedGraph": {
-            "final_acc_pct": 50.48,
-            "seen_cil_aia_pct": 62.71,
+            "final_acc_pct": 56.93,
+            "seen_cil_aia_pct": 66.48,
             "total_comm_mb": 30.96
           },
           "Online-FCL": {
-            "final_acc_pct": 41.66,
-            "seen_cil_aia_pct": 57.65,
+            "final_acc_pct": 45.3,
+            "seen_cil_aia_pct": 60.52,
             "total_comm_mb": 77.4
           },
           "DPFL-BGGC": {
-            "final_acc_pct": 42.39,
-            "seen_cil_aia_pct": 57.53,
+            "final_acc_pct": 46.58,
+            "seen_cil_aia_pct": 59.98,
             "total_comm_mb": 77.4
           },
           "L2C": {
-            "final_acc_pct": 39.54,
-            "seen_cil_aia_pct": 56.94,
+            "final_acc_pct": 43.81,
+            "seen_cil_aia_pct": 59.89,
             "total_comm_mb": 77.4
           },
           "AFCL": {
-            "final_acc_pct": 53.23,
-            "seen_cil_aia_pct": 65.9,
-            "total_comm_mb": 15.3
+            "final_acc_pct": 58.02,
+            "seen_cil_aia_pct": 69.14,
+            "total_comm_mb": 15.66
           },
           "Analytic-FCL": {
-            "final_acc_pct": 48.19,
-            "seen_cil_aia_pct": 62.0,
+            "final_acc_pct": 52.94,
+            "seen_cil_aia_pct": 65.13,
             "total_comm_mb": 2.31
           },
           "ACIL": {
-            "final_acc_pct": 47.23,
-            "seen_cil_aia_pct": 59.88,
+            "final_acc_pct": 50.69,
+            "seen_cil_aia_pct": 62.79,
             "total_comm_mb": 0.0
           },
           "DeLAMA-WC": {
-            "final_acc_pct": 47.16,
-            "seen_cil_aia_pct": 59.93,
+            "final_acc_pct": 50.78,
+            "seen_cil_aia_pct": 62.32,
             "total_comm_mb": 0.0
           },
           "DeLAMA": {
-            "final_acc_pct": 54.97,
-            "seen_cil_aia_pct": 67.23,
-            "total_comm_mb": 4.03
+            "final_acc_pct": 62.99,
+            "seen_cil_aia_pct": 72.61,
+            "total_comm_mb": 4.6
           },
           "DeLAMA-MP1": {
-            "final_acc_pct": 55.09,
-            "seen_cil_aia_pct": 67.06,
-            "total_comm_mb": 1.11
+            "final_acc_pct": 60.81,
+            "seen_cil_aia_pct": 70.93,
+            "total_comm_mb": 1.17
           },
           "DeLAMA-LocalDA-MP1": {
-            "final_acc_pct": 55.75,
-            "seen_cil_aia_pct": 67.79,
-            "total_comm_mb": 1.14
+            "final_acc_pct": 61.11,
+            "seen_cil_aia_pct": 71.59,
+            "total_comm_mb": 1.23
           }
         }
       },
@@ -880,8 +880,8 @@
             "total_comm_mb": 154.8
           },
           "DPFL-BGGC": {
-            "final_acc_pct": 49.44,
-            "seen_cil_aia_pct": 66.19,
+            "final_acc_pct": 49.39,
+            "seen_cil_aia_pct": 66.17,
             "total_comm_mb": 154.8
           },
           "L2C": {
@@ -927,64 +927,64 @@
         },
         "phi_unroll": {
           "GEM": {
-            "final_acc_pct": 54.21,
-            "seen_cil_aia_pct": 64.48,
+            "final_acc_pct": 59.02,
+            "seen_cil_aia_pct": 66.24,
             "total_comm_mb": 0.0
           },
           "pFedGraph": {
-            "final_acc_pct": 52.58,
-            "seen_cil_aia_pct": 67.74,
+            "final_acc_pct": 59.77,
+            "seen_cil_aia_pct": 71.88,
             "total_comm_mb": 61.92
           },
           "Online-FCL": {
-            "final_acc_pct": 40.53,
-            "seen_cil_aia_pct": 60.49,
+            "final_acc_pct": 44.23,
+            "seen_cil_aia_pct": 63.03,
             "total_comm_mb": 154.8
           },
           "DPFL-BGGC": {
-            "final_acc_pct": 42.19,
-            "seen_cil_aia_pct": 62.88,
+            "final_acc_pct": 49.72,
+            "seen_cil_aia_pct": 66.34,
             "total_comm_mb": 154.8
           },
           "L2C": {
-            "final_acc_pct": 40.71,
-            "seen_cil_aia_pct": 61.31,
+            "final_acc_pct": 46.84,
+            "seen_cil_aia_pct": 64.73,
             "total_comm_mb": 154.8
           },
           "AFCL": {
-            "final_acc_pct": 55.4,
-            "seen_cil_aia_pct": 69.9,
-            "total_comm_mb": 36.18
+            "final_acc_pct": 59.51,
+            "seen_cil_aia_pct": 72.96,
+            "total_comm_mb": 36.4
           },
           "Analytic-FCL": {
-            "final_acc_pct": 51.94,
-            "seen_cil_aia_pct": 67.46,
+            "final_acc_pct": 56.49,
+            "seen_cil_aia_pct": 70.8,
             "total_comm_mb": 4.61
           },
           "ACIL": {
-            "final_acc_pct": 59.55,
-            "seen_cil_aia_pct": 72.65,
+            "final_acc_pct": 63.63,
+            "seen_cil_aia_pct": 75.76,
             "total_comm_mb": 0.0
           },
           "DeLAMA-WC": {
-            "final_acc_pct": 59.75,
-            "seen_cil_aia_pct": 72.64,
+            "final_acc_pct": 63.13,
+            "seen_cil_aia_pct": 74.06,
             "total_comm_mb": 0.0
           },
           "DeLAMA": {
-            "final_acc_pct": 63.09,
-            "seen_cil_aia_pct": 75.74,
-            "total_comm_mb": 7.95
+            "final_acc_pct": 68.12,
+            "seen_cil_aia_pct": 78.92,
+            "total_comm_mb": 8.72
           },
           "DeLAMA-MP1": {
-            "final_acc_pct": 63.27,
-            "seen_cil_aia_pct": 75.83,
-            "total_comm_mb": 2.21
+            "final_acc_pct": 67.43,
+            "seen_cil_aia_pct": 78.23,
+            "total_comm_mb": 2.29
           },
           "DeLAMA-LocalDA-MP1": {
-            "final_acc_pct": 63.3,
-            "seen_cil_aia_pct": 75.98,
-            "total_comm_mb": 2.22
+            "final_acc_pct": 67.4,
+            "seen_cil_aia_pct": 78.39,
+            "total_comm_mb": 2.36
           }
         }
       }
@@ -994,179 +994,179 @@
         "iterative_sweep": {
           "AFCL": {
             "1": {
-              "final_acc_pct": 52.95,
-              "total_comm_mb": 0.52
+              "final_acc_pct": 57.33,
+              "total_comm_mb": 0.53
             },
             "2": {
-              "final_acc_pct": 54.51,
-              "total_comm_mb": 1.02
+              "final_acc_pct": 59.25,
+              "total_comm_mb": 1.04
             },
             "5": {
-              "final_acc_pct": 56.07,
-              "total_comm_mb": 2.4
+              "final_acc_pct": 61.96,
+              "total_comm_mb": 2.47
             },
             "10": {
-              "final_acc_pct": 54.6,
-              "total_comm_mb": 4.53
+              "final_acc_pct": 61.12,
+              "total_comm_mb": 4.71
             },
             "20": {
-              "final_acc_pct": 54.42,
-              "total_comm_mb": 8.41
+              "final_acc_pct": 60.25,
+              "total_comm_mb": 8.78
             },
             "50": {
-              "final_acc_pct": 51.33,
-              "total_comm_mb": 18.74
+              "final_acc_pct": 56.05,
+              "total_comm_mb": 20.03
             },
             "100": {
-              "final_acc_pct": 51.39,
-              "total_comm_mb": 27.94
+              "final_acc_pct": 55.22,
+              "total_comm_mb": 29.03
             }
           },
           "DPFL-BGGC": {
             "1": {
-              "final_acc_pct": 50.21,
+              "final_acc_pct": 54.62,
               "total_comm_mb": 1.55
             },
             "2": {
-              "final_acc_pct": 50.01,
+              "final_acc_pct": 56.08,
               "total_comm_mb": 3.1
             },
             "5": {
-              "final_acc_pct": 52.5,
+              "final_acc_pct": 57.66,
               "total_comm_mb": 7.74
             },
             "10": {
-              "final_acc_pct": 45.37,
+              "final_acc_pct": 53.77,
               "total_comm_mb": 15.48
             },
             "20": {
-              "final_acc_pct": 50.44,
+              "final_acc_pct": 56.17,
               "total_comm_mb": 30.96
             },
             "50": {
-              "final_acc_pct": 47.58,
+              "final_acc_pct": 53.82,
               "total_comm_mb": 77.4
             },
             "100": {
-              "final_acc_pct": 37.69,
+              "final_acc_pct": 46.95,
               "total_comm_mb": 154.8
             }
           },
           "L2C": {
             "1": {
-              "final_acc_pct": 49.02,
+              "final_acc_pct": 53.78,
               "total_comm_mb": 1.55
             },
             "2": {
-              "final_acc_pct": 48.72,
+              "final_acc_pct": 54.9,
               "total_comm_mb": 3.1
             },
             "5": {
-              "final_acc_pct": 49.68,
+              "final_acc_pct": 55.73,
               "total_comm_mb": 7.74
             },
             "10": {
-              "final_acc_pct": 42.44,
+              "final_acc_pct": 49.91,
               "total_comm_mb": 15.48
             },
             "20": {
-              "final_acc_pct": 46.94,
+              "final_acc_pct": 53.06,
               "total_comm_mb": 30.96
             },
             "50": {
-              "final_acc_pct": 43.23,
+              "final_acc_pct": 49.47,
               "total_comm_mb": 77.4
             },
             "100": {
-              "final_acc_pct": 41.14,
+              "final_acc_pct": 46.87,
               "total_comm_mb": 154.8
             }
           },
           "Online-FCL": {
             "1": {
-              "final_acc_pct": 44.88,
+              "final_acc_pct": 49.38,
               "total_comm_mb": 1.55
             },
             "2": {
-              "final_acc_pct": 44.15,
+              "final_acc_pct": 49.13,
               "total_comm_mb": 3.1
             },
             "5": {
-              "final_acc_pct": 44.61,
+              "final_acc_pct": 50.03,
               "total_comm_mb": 7.74
             },
             "10": {
-              "final_acc_pct": 43.97,
+              "final_acc_pct": 49.61,
               "total_comm_mb": 15.48
             },
             "20": {
-              "final_acc_pct": 42.78,
+              "final_acc_pct": 47.11,
               "total_comm_mb": 30.96
             },
             "50": {
-              "final_acc_pct": 44.02,
+              "final_acc_pct": 48.99,
               "total_comm_mb": 77.4
             },
             "100": {
-              "final_acc_pct": 37.39,
+              "final_acc_pct": 40.28,
               "total_comm_mb": 154.8
             }
           },
           "pFedGraph": {
             "1": {
-              "final_acc_pct": 50.47,
+              "final_acc_pct": 56.06,
               "total_comm_mb": 0.62
             },
             "2": {
-              "final_acc_pct": 51.81,
+              "final_acc_pct": 58.41,
               "total_comm_mb": 1.24
             },
             "5": {
-              "final_acc_pct": 51.56,
+              "final_acc_pct": 58.03,
               "total_comm_mb": 3.1
             },
             "10": {
-              "final_acc_pct": 51.91,
+              "final_acc_pct": 58.92,
               "total_comm_mb": 6.19
             },
             "20": {
-              "final_acc_pct": 52.02,
+              "final_acc_pct": 58.95,
               "total_comm_mb": 12.38
             },
             "50": {
-              "final_acc_pct": 51.6,
+              "final_acc_pct": 56.3,
               "total_comm_mb": 30.96
             },
             "100": {
-              "final_acc_pct": 41.08,
+              "final_acc_pct": 58.97,
               "total_comm_mb": 61.92
             }
           }
         },
         "delama_sweep": {
           "DeLAMA-MP1": {
-            "final_acc_pct": 59.88,
-            "total_comm_mb": 2.22
+            "final_acc_pct": 65.11,
+            "total_comm_mb": 2.31
           },
           "DeLAMA-MP2": {
-            "final_acc_pct": 59.08,
-            "total_comm_mb": 2.88
+            "final_acc_pct": 65.15,
+            "total_comm_mb": 3.05
           },
           "DeLAMA-MP3": {
-            "final_acc_pct": 59.49,
-            "total_comm_mb": 3.53
+            "final_acc_pct": 65.9,
+            "total_comm_mb": 3.8
           },
           "DeLAMA-MP5": {
-            "final_acc_pct": 59.49,
-            "total_comm_mb": 4.83
+            "final_acc_pct": 66.0,
+            "total_comm_mb": 5.28
           },
           "DeLAMA": {
-            "final_acc_pct": 59.52,
-            "total_comm_mb": 8.1
+            "final_acc_pct": 66.12,
+            "total_comm_mb": 8.99
           },
           "DeLAMA-LocalDA-MP1": {
-            "final_acc_pct": 60.04,
-            "total_comm_mb": 2.25
+            "final_acc_pct": 65.16,
+            "total_comm_mb": 2.4
           }
         }
       },
@@ -1204,19 +1204,19 @@
           },
           "DPFL-BGGC": {
             "1": {
-              "final_acc_pct": 54.51,
+              "final_acc_pct": 54.55,
               "total_comm_mb": 1.55
             },
             "2": {
-              "final_acc_pct": 55.87,
+              "final_acc_pct": 55.88,
               "total_comm_mb": 3.1
             },
             "5": {
-              "final_acc_pct": 57.53,
+              "final_acc_pct": 57.51,
               "total_comm_mb": 7.74
             },
             "10": {
-              "final_acc_pct": 53.61,
+              "final_acc_pct": 53.66,
               "total_comm_mb": 15.48
             },
             "20": {
@@ -1224,7 +1224,7 @@
               "total_comm_mb": 30.96
             },
             "50": {
-              "final_acc_pct": 53.51,
+              "final_acc_pct": 53.69,
               "total_comm_mb": 77.4
             },
             "100": {
@@ -1643,49 +1643,49 @@
     },
     "newton_m1_residuals": {
       "1": {
-        "f64_dual_residual_mean": 712.0592250436031,
-        "f64_primal_frob_err_mean": 130.47153358655524,
-        "f32_primal_frob_err_mean": 16.3940472218046,
-        "downstream_acc_t10_pct": 55.61
+        "f64_dual_residual_mean": 732.9678721235441,
+        "f64_primal_frob_err_mean": 134.02747933807947,
+        "f32_primal_frob_err_mean": 16.216689759590253,
+        "downstream_acc_t10_pct": 61.71
       },
       "2": {
-        "f64_dual_residual_mean": 27.0743651654465,
-        "f64_primal_frob_err_mean": 7.6674764803562265,
-        "f32_primal_frob_err_mean": 6.749291577072753
+        "f64_dual_residual_mean": 16.924759116601596,
+        "f64_primal_frob_err_mean": 4.677950945943511,
+        "f32_primal_frob_err_mean": 6.808404076314066
       },
       "3": {
-        "f64_dual_residual_mean": 0.7806781741625118,
-        "f64_primal_frob_err_mean": 0.22346585940176417,
-        "f32_primal_frob_err_mean": 1.4580522641667242,
-        "downstream_acc_t10_pct": 59.63
+        "f64_dual_residual_mean": 0.950931594918037,
+        "f64_primal_frob_err_mean": 0.273886179817516,
+        "f32_primal_frob_err_mean": 1.2418560524227342,
+        "downstream_acc_t10_pct": 66.15
       },
       "5": {
-        "f64_dual_residual_mean": 1.6343417501047951e-06,
-        "f64_primal_frob_err_mean": 5.28205811949471e-07,
-        "f32_primal_frob_err_mean": 0.0012170239486449872,
-        "downstream_acc_t10_pct": 59.52
+        "f64_dual_residual_mean": 4.7867974290376484e-06,
+        "f64_primal_frob_err_mean": 1.467791212245753e-06,
+        "f32_primal_frob_err_mean": 0.0013117713252074642,
+        "downstream_acc_t10_pct": 66.12
       },
       "8": {
-        "f64_dual_residual_mean": 5.357492227631154e-15,
+        "f64_dual_residual_mean": 6.576073019459727e-15,
         "f64_primal_frob_err_mean": 0.0,
-        "f32_primal_frob_err_mean": 6.400165876570984e-05
+        "f32_primal_frob_err_mean": 0.0001453422829335955
       },
       "10": {
-        "f64_dual_residual_mean": 5.357492227631154e-15,
+        "f64_dual_residual_mean": 6.576073019459727e-15,
         "f64_primal_frob_err_mean": 0.0,
-        "f32_primal_frob_err_mean": 6.400127157572484e-05,
-        "downstream_acc_t10_pct": 59.52
+        "f32_primal_frob_err_mean": 0.0001453422829335955,
+        "downstream_acc_t10_pct": 66.12
       },
       "15": {
-        "f64_dual_residual_mean": 5.361044941309955e-15,
-        "f64_primal_frob_err_mean": 2.0989645391927125e-16,
-        "f32_primal_frob_err_mean": 6.400687640635754e-05
+        "f64_dual_residual_mean": 6.519229600598919e-15,
+        "f64_primal_frob_err_mean": 7.836085228811947e-16,
+        "f32_primal_frob_err_mean": 0.00014536592992538678
       },
       "50": {
-        "f64_dual_residual_mean": 5.357492227631154e-15,
+        "f64_dual_residual_mean": 6.576073019459727e-15,
         "f64_primal_frob_err_mean": 0.0,
-        "f32_primal_frob_err_mean": 6.400165876570984e-05,
-        "downstream_acc_t10_pct": 59.52
+        "f32_primal_frob_err_mean": 0.0001453422829335955,
+        "downstream_acc_t10_pct": 66.12
       }
     }
   },

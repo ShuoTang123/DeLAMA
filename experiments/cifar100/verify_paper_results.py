@@ -66,9 +66,9 @@ def main() -> None:
     summary = json.loads(SUMMARY_PATH.read_text(encoding="utf-8"))
 
     p1 = summary["split_cifar100_p1"]
-    check_close("Summary P1 N=6 DeLAMA Acc_t10", p1["N6"]["DeLAMA"]["final_acc_pct"], 59.52)
-    check_close("Summary P1 N=6 DeLAMA-MP1 Acc_t10", p1["N6"]["DeLAMA-MP1"]["final_acc_pct"], 59.88)
-    check_close("Summary P1 N=24 DeLAMA Acc_t10", p1["N24"]["DeLAMA"]["final_acc_pct"], 64.57)
+    check_close("Summary P1 N=6 DeLAMA Acc_t10", p1["N6"]["DeLAMA"]["final_acc_pct"], 66.12)
+    check_close("Summary P1 N=6 DeLAMA-MP1 Acc_t10", p1["N6"]["DeLAMA-MP1"]["final_acc_pct"], 65.11)
+    check_close("Summary P1 N=24 DeLAMA Acc_t10", p1["N24"]["DeLAMA"]["final_acc_pct"], 70.07)
     check_close("Summary P2 N=6 DeLAMA Acc_t10", summary["split_cifar100_p2"]["N6"]["DeLAMA"]["final_acc_pct"], 69.32)
     check_close("Summary CIFAR-10 DeLAMA Acc_t10", summary["cifar10"]["DeLAMA"]["final_acc_pct"], 76.51)
 
@@ -97,6 +97,7 @@ def main() -> None:
     sh_s = summary["major_revision_shield"]
     m82_s = summary["mapping_82maps"]
     check_close("Summary P1-NR10 phi_CE DeLAMA", sh_s["nonrevisiting"]["P1_NR10"]["phi_CE"]["DeLAMA"]["final_acc_pct"], 67.44)
+    check_close("Summary P1-NR10 phi_unroll DeLAMA", sh_s["nonrevisiting"]["P1_NR10"]["phi_unroll"]["DeLAMA"]["final_acc_pct"], 68.12)
     check_close("Summary 5-Split phi_CE DeLAMA Mean", sh_s["multisplit_5seeds_phi_CE"]["DeLAMA"]["mean_acc"], 65.37)
     check_close("Summary 82-Map LiDAR DeLAMA Mean F1", m82_s["ours"]["DeLAMA"]["mean_f1_pct"], 95.24)
     print(f"  P1-NR10 CE    | DeLAMA={sh_s['nonrevisiting']['P1_NR10']['phi_CE']['DeLAMA']['final_acc_pct']:.2f}% vs "

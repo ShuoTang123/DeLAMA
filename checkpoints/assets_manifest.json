@@ -6,8 +6,8 @@
     "checkpoints": {
       "filename": "delama_checkpoints_v1.0.0.tar.gz",
       "url": "https://github.com/ShuoTang123/DeLAMA/releases/download/v1.0.0/delama_checkpoints_v1.0.0.tar.gz",
-      "sha256": "d1cf54ba6c5a9f1b0767f5734be6a842af56fbeff0046c1321dd4da8f37791ee",
-      "size_bytes": 207786279,
+      "sha256": "18308380fbbf986b010660ddf2e1bc022c0f623d74736c23a2194dcdaeb4509c",
+      "size_bytes": 207850259,
       "num_files": 50
     },
     "data": {
@@ -20,19 +20,19 @@
     "results": {
       "filename": "delama_raw_results_v1.0.0.tar.gz",
       "url": "https://github.com/ShuoTang123/DeLAMA/releases/download/v1.0.0/delama_raw_results_v1.0.0.tar.gz",
-      "sha256": "da3f2903d75857caefc2ac516418079ad160f076bd08c69e86840ff096d5e412",
-      "size_bytes": 4807701,
+      "sha256": "b4e5f450b92edd88af4214456f9ce9f76f96d9f253b83191b7d9dd9c3baebddd",
+      "size_bytes": 4806320,
       "num_files": 45
     }
   },
   "key_checkpoints": {
     "checkpoints/cifar100/p1_stage1_nocollab_phi_d128.pt": {
-      "sha256": "10fac95374059da800f1be73160b4ac9ef57152f4bf54ebcab3e220789d0e4d8",
-      "size_bytes": 19842923
+      "sha256": "01b2a90f883f4fb217bf4821d4ef503cc509d2551b5ba3f19a9e83f4f4459825",
+      "size_bytes": 19843179
     },
     "checkpoints/cifar100/p1_stage2_collab_phi_d128.pt": {
-      "sha256": "ffea1f5cebc32f1b2b892429cc65ce7aaf19d9b9dd21cf1939be8f750e6ce448",
-      "size_bytes": 19843263
+      "sha256": "56a4ab0db79859da8e5eb8ce1c1b3a0588599adea87bbdce6588402fff0bb6da",
+      "size_bytes": 19843519
     },
     "checkpoints/cifar100/p1_sup_ce_phi_d128.pt": {
       "sha256": "b190ebfd6cb6867d84e169fb7048724b534aeea478ac9bcbcd9fe1620c62ad62",
