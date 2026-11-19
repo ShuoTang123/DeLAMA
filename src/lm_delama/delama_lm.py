@@ -305,6 +305,232 @@ def delama_lm_episode(
 
 
 @torch.no_grad()
+def compute_pretrained_pca_basis(
+    gpt_model,
+    valid_tokens: np.ndarray,
+    w_len: int = 48,
+    n_tgt: int = 32,
+    n_windows: int = 1000,
+    seed: int = 0,
+    batch_size: int = 256,
+) -> torch.Tensor:
+    """Compute a fixed orthogonal eigenbasis U_pre in R^{(D+1) x (D+1)} from the frozen
+    pretrained model's own pretraining validation corpus (WikiText-103 valid).
+    Uses ZERO downstream task data. Rotating augmented features X_r = X @ U_pre preserves
+    logits, Frobenius norms, and pairwise head distances identically while decorrelating
+    coordinates for strict O(d^2 + V d) replay-free online-Laplace curvature memory.
+    """
+    rng = np.random.default_rng(seed)
+    ix = rng.integers(0, len(valid_tokens) - w_len - 1, n_windows)
+    x = torch.from_numpy(np.stack([valid_tokens[i : i + w_len] for i in ix]).astype(np.int64))
+    hs = []
+    for b in range(0, len(x), batch_size):
+        h, _ = gpt_model(x[b : b + batch_size])
+        hs.append(h[:, w_len - n_tgt :])
+    H = torch.cat(hs).reshape(-1, hs[0].shape[-1]).float()
+    X = torch.cat([H, torch.ones(len(H), 1)], dim=1)
+    G_pre = (X.T @ X) / len(X)
+    _, U_pre = torch.linalg.eigh(G_pre)
+    return U_pre.float()
+
+
+@torch.no_grad()
+def run_delama_r_replay_free_episode(
+    ep: Dict,
+    W_init: torch.Tensor,
+    b_init: torch.Tensor,
+    U_pre: torch.Tensor,
+    collab: bool = True,
+    memory: bool = True,
+    graph: str = "learned",  # "learned" | "uniform" | "group_oracle"
+    lam_prior: float = 65.0,
+    damp_mem: float = 6.0,
+    lam2_graph: float = 2.0,
+    lam3_graph: float = 0.12,
+    k_init: int = 5,
+    k_later: int = 3,
+    da_steps: int = 10,
+    edge_thresh: float = 1e-4,
+    method: str = "DeLAMA-R",
+) -> LMEpisodeResult:
+    """
+    Strict O(d^2 + V d) replay-free DeLAMA-R via Eigenbasis-Diagonal Online Laplace
+    with Unit-Normalized Dual-Newton Graph Inference and In-Loop Consensus Newton.
+
+    Key properties:
+      1. Strictly constant O(d^2 + V d) memory per agent independent of t:
+         stores ONLY (G_bar, g0_bar, a0_bar, D_mem, F_mem, Th_r). Past hidden states
+         and labels are never retained; each step touches ONLY the current batch (X_t, Y_t).
+      2. Zero vector-level global all-reduce and zero ad-hoc cosine gating:
+         each agent locally unit-normalizes its 1-step origin signature before exchanging
+         with physical neighbors and solving the standard scalar-broadcast Eq. (6) dual-Newton QP.
+      3. Zero knowledge of true group count G or group size:
+         self-retention uses the local participation-ratio neighborhood size
+         n_nbr_i = (sum_{j != i} W_row_{ij}^2)^{-1}, alpha_self_i = 1 / (1 + n_nbr_i).
+      4. O(Vd) elementwise preconditioned Newton solve in the frozen pretrained eigenbasis U_pre,
+         paired with exact per-token non-Kronecker directional curvature line scaling on batch t.
+    """
+    t0 = time.perf_counter()
+    N, T = len(ep["sx"]), len(ep["sx"][0])
+    V, D = W_init.shape
+    d = D + 1
+    qX_r = [torch.cat([ep["qx"][j], torch.ones(len(ep["qx"][j]), 1)], dim=1) @ U_pre for j in range(N)]
+    zq = [ep["qx"][j] @ W_init.T + b_init for j in range(N)]
+    g_arr = np.asarray(ep["group"])
+    mask = torch.ones(N, N) - torch.eye(N)
+    eye_d = torch.eye(d)
+
+    nll_m = np.zeros((T, N))
+    t1_m = np.zeros((T, N))
+    t5_m = np.zeros((T, N))
+    adj_rec = np.zeros((T, N, N))
+    comm = 0.0
+    msg_bytes = V * d * 4
+    scalar_bytes = 8  # float64 conservative accounting for dual-Newton scalars
+
+    # Strict O(d^2 + V d) constant-size persistent memory per agent (zero past batches)
+    G_bar = torch.zeros(N, d, d)
+    g0_bar = torch.zeros(N, V, d)
+    a0_bar = torch.zeros(N, V)
+    D_mem = torch.zeros(N, V, d)
+    F_mem = torch.zeros(N, V, d)
+    Th_r = torch.zeros(N, V, d)
+
+    for t in range(T):
+        X_r_list, X_r_sq_list, Z0_list, Yoh_list, n_list, sig_l = [], [], [], [], [], []
+        w_old, w_new = (t / (t + 1.0), 1.0 / (t + 1.0)) if (memory and t > 0) else (0.0, 1.0)
+        eff_steps = (t + 1) if memory else 1
+
+        for j in range(N):
+            # Access ONLY current batch t (discarded at end of timestamp t)
+            H_t = ep["sx"][j][t]
+            Y_t = ep["sy"][j][t]
+            n_t = len(Y_t)
+            X_t = torch.cat([H_t, torch.ones(n_t, 1)], dim=1)
+            Z0_t = H_t @ W_init.T + b_init
+            Yoh_t = F.one_hot(Y_t, V).float()
+            X_r = X_t @ U_pre
+
+            X_r_list.append(X_r)
+            X_r_sq_list.append(X_r * X_r)
+            Z0_list.append(Z0_t)
+            Yoh_list.append(Yoh_t)
+            n_list.append(n_t)
+
+            # Incremental running origin statistics (constant O(d^2 + V d) storage)
+            P0_t = torch.softmax(Z0_t, dim=-1)
+            G_t = (X_t.T @ X_t) / n_t
+            g0_t = ((P0_t - Yoh_t).T @ X_t) / n_t
+            a0_t = (0.5 * P0_t * (1.0 - P0_t) + 0.25 * Yoh_t * (1.0 - P0_t)).mean(dim=0)
+            G_bar[j] = w_old * G_bar[j] + w_new * G_t
+            g0_bar[j] = w_old * g0_bar[j] + w_new * g0_t
+            a0_bar[j] = w_old * a0_bar[j] + w_new * a0_t
+
+            if collab and graph == "learned":
+                lg_G, U_G = torch.linalg.eigh(G_bar[j] + 1e-5 * eye_d)
+                a0_c = a0_bar[j].clamp_min(1e-4)
+                n_cum = eff_steps * n_t
+                th1 = ((g0_bar[j] @ U_G) / (a0_c.unsqueeze(1) * lg_G.unsqueeze(0) + 50.0 / n_cum)) @ U_G.T
+                sig_l.append(th1.reshape(-1))
+
+        if not collab:
+            W_mix = torch.eye(N)
+        elif graph == "uniform":
+            W_mix = torch.ones(N, N) / N
+            adj_rec[t] = (W_mix * mask).numpy()
+        elif graph == "group_oracle":
+            W_mix = torch.tensor((g_arr[:, None] == g_arr[None, :]).astype(np.float32))
+            W_mix = W_mix / W_mix.sum(dim=1, keepdim=True)
+            adj_rec[t] = (W_mix * mask).numpy()
+        else:
+            # Local unit-normalization -> pure scalar-broadcast Eq. (6) dual-Newton QP
+            Sig_u = F.normalize(torch.stack(sig_l), dim=-1)
+            Wg = dual_ascent_graph(
+                Sig_u, torch.tensor(lam2_graph), torch.tensor(lam3_graph), mask, steps=da_steps
+            )
+            Wg = Wg * (Wg > edge_thresh).float() * mask
+            adj_rec[t] = Wg.numpy()
+            W_row = Wg / (Wg.sum(dim=1, keepdim=True) + 1e-6)
+            eff_nbr = 1.0 / (W_row ** 2).sum(dim=1, keepdim=True).clamp_min(1e-6)
+            has_nbr = (Wg.sum(dim=1, keepdim=True) > 1e-5).float()
+            alpha_self = 1.0 / (1.0 + eff_nbr)
+            W_mix = (1.0 - has_nbr) * torch.eye(N) + has_nbr * (
+                alpha_self * torch.eye(N) + (1.0 - alpha_self) * W_row
+            )
+
+        if not memory:
+            Th_r.zero_()
+
+        K_steps = k_init if (t == 0 or not memory) else k_later
+        n_eff_mult = 1.0 / (W_mix ** 2).sum(dim=1).clamp_min(1e-4)
+
+        for _ in range(K_steps):
+            Th_next = torch.empty_like(Th_r)
+            for j in range(N):
+                X_r, X_r_sq, Z0_t, Yoh_t, n_t = X_r_list[j], X_r_sq_list[j], Z0_list[j], Yoh_list[j], n_list[j]
+                n_cum = eff_steps * n_t
+                gamma = lam_prior / (n_cum * float(n_eff_mult[j]))
+                P = torch.softmax(Z0_t + X_r @ Th_r[j].T, dim=-1)
+                g_cur = ((P - Yoh_t).T @ X_r) / n_t
+                Psec = 0.5 * P + 0.5 * Yoh_t
+                Wcurv = torch.maximum(P * (1.0 - P), 0.5 * Psec * (1.0 - Psec))
+                D_cur = (Wcurv.T @ X_r_sq) / n_t
+
+                grad = w_new * g_cur + 2.0 * gamma * Th_r[j]
+                D_tot = w_new * D_cur + 2.0 * gamma + 1e-6
+                if w_old > 0.0:
+                    grad = grad + w_old * (D_mem[j] * Th_r[j] - F_mem[j])
+                    D_tot = D_tot + w_old * D_mem[j]
+
+                S = grad / D_tot
+                dZ = X_r @ S.T
+                denom = w_new * (Wcurv * (dZ ** 2)).mean(dim=0) + 2.0 * gamma * (S * S).sum(dim=1)
+                if w_old > 0.0:
+                    denom = denom + w_old * (D_mem[j] * (S * S)).sum(dim=1)
+                eta = ((grad * S).sum(dim=1) / denom.clamp_min(1e-8)).clamp(0.0, 2.0)
+                Th_next[j] = Th_r[j] - eta.unsqueeze(1) * S
+            Th_r = torch.einsum("jk,kvd->jvd", W_mix, Th_next)
+
+        # Commit current batch into constant-size online-Laplace memory and discard batch t
+        if memory:
+            for j in range(N):
+                X_r, X_r_sq, Z0_t, Yoh_t, n_t = X_r_list[j], X_r_sq_list[j], Z0_list[j], Yoh_list[j], n_list[j]
+                P = torch.softmax(Z0_t + X_r @ Th_r[j].T, dim=-1)
+                g_fin = ((P - Yoh_t).T @ X_r) / n_t
+                Psec = 0.5 * P + 0.5 * Yoh_t
+                Wcurv = torch.maximum(P * (1.0 - P), 0.5 * Psec * (1.0 - Psec))
+                D_fin = damp_mem * ((Wcurv.T @ X_r_sq) / n_t)
+                F_cur = D_fin * Th_r[j] - g_fin
+                D_mem[j] = w_old * D_mem[j] + w_new * D_fin
+                F_mem[j] = w_old * F_mem[j] + w_new * F_cur
+
+        if collab:
+            active = int(((W_mix * mask) > edge_thresh).sum().item())
+            graph_bytes = (N * (N - 1) * msg_bytes + da_steps * N * 2 * scalar_bytes) if graph == "learned" else 0
+            comm += graph_bytes + K_steps * active * msg_bytes
+
+        for j in range(N):
+            a, b1, b5 = eval_logits(zq[j] + qX_r[j] @ Th_r[j].T, ep["qy"][j])
+            nll_m[t, j], t1_m[t, j], t5_m[t, j] = a.item(), b1.item(), b5.item()
+
+    # Constant persistent state per agent (bytes, float32):
+    #   active head Th_r (Vd) + online-Laplace (D_mem, F_mem: 2Vd) + origin stats (G_bar d^2, g0_bar Vd, a0_bar V)
+    #   + shared orthogonal basis U_pre (d^2) -> strictly O(d^2 + Vd) independent of T
+    mem_floats = (2 * d * d + 4 * V * d + V) if memory else (V * d)
+    return LMEpisodeResult(
+        method=method,
+        nll=nll_m,
+        top1=t1_m,
+        top5=t5_m,
+        comm_bytes=comm,
+        wall_clock_sec=time.perf_counter() - t0,
+        mem_bytes_per_agent=float(mem_floats * 4),
+        adj=adj_rec,
+        group=ep["group"],
+    )
+
+
+@torch.no_grad()
 def run_delama_consensus_rc_episode(
     ep: Dict,
     W_pre: torch.Tensor,
