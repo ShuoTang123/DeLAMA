@@ -51,25 +51,25 @@ def dual_ascent(beta_s, param, *args):
     else:
         communication_graph = torch.ones((agent_num, agent_num), device=device) - torch.eye(agent_num, device=device)
 
-    communication_mask = communication_graph + torch.eye(agent_num, device=device)
-    z = - lambda2 * torch.min(y)
+    edge_mask = (communication_graph > 0).to(dtype=y.dtype, device=device)
+    edge_mask = edge_mask * (1.0 - torch.eye(agent_num, device=device, dtype=y.dtype))
+    y_masked = y + 1e10 * (1.0 - edge_mask)
+    z = -lambda2 * torch.min(y_masked)
     for k in range(5):
-        u = (-1 / lambda3) * (lambda2 * y + z * torch.ones(agent_num, device=device)) * communication_mask
+        u = (-1 / lambda3) * (lambda2 * y + z)
         sp = (u + (u ** 2 + b) ** 0.5) / 2
         sp_p = 0.5 * (1 + u / (u ** 2 + b) ** 0.5)
         sp_pp = b / (2 * (u ** 2 + b) ** 1.5)
-        w = sp
+        w = sp * edge_mask
 
-        f = torch.sum(u * sp_p) + torch.sum(sp * (1 - sp_p))
-        f_hat = torch.sum(2 * sp_p - sp_p ** 2) + torch.sum((u - sp) * sp_pp)
+        f = torch.sum((u * sp_p + sp * (1 - sp_p)) * edge_mask)
+        f_hat = torch.sum((2 * sp_p - sp_p ** 2 + (u - sp) * sp_pp) * edge_mask)
 
         f = f - 2 * edge_num
         f_hat = (-1 / lambda3) * f_hat
 
         z = z - f / f_hat
 
-    # communication_mask = communication_graph + torch.eye(agent_num)
-    # w = w * communication_mask
     adj_matrix = w / (torch.sum(w) + 1e-5) * 2 * edge_num
     # print(torch.sum(adj_matrix))
     t_end = time.time()

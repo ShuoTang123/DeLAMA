@@ -8,7 +8,7 @@ Official code, deterministic split builders, lightweight verification manifests,
 
 `DeLAMA` enables $N$ decentralized agents observing non-stationary task streams over a peer-to-peer network to retain historical knowledge without raw data replay and dynamically discover helpful collaborators:
 
-1. **Replay-Free Second-Order Local Memory & Exact $\mathcal{O}(d^3)$ Kronecker Identity (`Phi_local`):** Compresses past supervised losses via cumulative sufficient statistics at the origin $\boldsymbol{\alpha}_i^{(t)} = \mathbf{0}$ and eliminates class-dimension cubic scaling without approximation.
+1. **Replay-Free Second-Order Local Memory & Exact $\mathcal{O}(d^3 + Cd^2)$ Kronecker Identity (`Phi_local`):** Compresses past supervised losses via cumulative sufficient statistics at the origin $\boldsymbol{\alpha}_i^{(t)} = \mathbf{0}$ and eliminates class-dimension cubic scaling without approximation.
 2. **Scalar-Broadcast & One-Hop Dynamic Graph Inference (`Phi_graph`):** Infers symmetric sparse collaboration graphs using smoothed dual-Newton steps requiring only two scalar reductions per step, or purely one-hop row-budget normalization with zero global all-reduce (`DeLAMA-LocalDA`).
 3. **Contractive Jacobi Message Passing (`Phi_param`):** Updates local task heads over active peer links ($W_{ij}^{(t)} > 10^{-4}$) using a cached $d \times d$ Cholesky factor, remaining effective down to $M_2 = 1$ step (`DeLAMA-MP1` / `DeLAMA-LocalDA-MP1`).
 4. **Two-Stage Algorithm Unrolling & Residual Adaptation (`DeLAMA-R`):** Meta-trains aligned representations and regularization gates across continual episodes, and extends to pretrained causal Transformers via secant-curvature residual heads.
@@ -106,8 +106,10 @@ cd src && python3 result_regression.py
 
 ### 3. Compact Pretrained Transformer Adaptation (`DeLAMA-R` on `TinyGPT`)
 
+Reproduce the strict $\mathcal{O}(d^2 + Vd)$ constant-memory (`2.25 MB`/agent) replay-free `DeLAMA-R` benchmark and all 7 first-order baselines across 10 paired test episodes on 20 Newsgroups ($N = 6$) and 3-Domain English/Python/C++ ($N = 12$, direct and warmup-calibrated):
+
 ```bash
-bash experiments/lm/run_lm_tier0.sh "--n_agents 6 --groups comp rec sci --kfac" "--n_agents 12 --kfac"
+python3 experiments/lm/run_lm_replay_free_benchmark.py --workers 16 --threads-per-worker 4
 ```
 
 ### 4. Simulated Multi-Robot 2D LiDAR Mapping (82 Held-Out CubiCasa5k Floorplans)
@@ -144,6 +146,7 @@ This repository is released under the [MIT License](LICENSE). If you find `DeLAM
   title={Decentralized and Lifelong-Adaptive Multi-Agent Collaborative Learning},
   author={Tang, Shuo and Ye, Rui and Xu, Chenxin and Dong, Xiaowen and Chen, Siheng and Wang, Yanfeng},
   journal={Big Data and Cognitive Computing},
-  year={2026}
+  year={2026},
+  note={Submitted manuscript}
 }
 ```

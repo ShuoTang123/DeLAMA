@@ -108,11 +108,25 @@ def main() -> None:
           f"DSGT (Online)={m82_s['group1_w_o_delama_encoder']['DSGT']['mean_f1_pct']:.2f}% | "
           f"DSGT (Shared)={m82_s['group2_shared_delama_encoder']['DSGT']['mean_f1_pct']:.2f}%")
 
-    # Check LM committed lightweight JSONs too
-    lm_path = ROOT / "results" / "lm" / "lm_N6_kfac.json"
+    # Check LM committed replay-free benchmark JSON and summary block
+    lm_s = summary.get("lm_tinygpt")
+    if lm_s is not None:
+        check_close("Summary LM 20NG DeLAMA-R PPL", lm_s["20ng"]["DeLAMA-R (Ours)"]["final_ppl"], 58.47)
+        check_close("Summary LM 3Domain Direct DeLAMA-R PPL", lm_s["3domain_direct"]["DeLAMA-R (Ours)"]["final_ppl"], 63.47)
+        check_close("Summary LM 3Domain Calib DeLAMA-R PPL", lm_s["3domain_calibrated"]["DeLAMA-R (Ours)"]["final_ppl"], 55.37)
+        print(
+            f"  TinyGPT LM    | 20NG DeLAMA-R={lm_s['20ng']['DeLAMA-R (Ours)']['final_ppl']:.2f} | "
+            f"3Dom-Direct={lm_s['3domain_direct']['DeLAMA-R (Ours)']['final_ppl']:.2f} | "
+            f"3Dom-Calib={lm_s['3domain_calibrated']['DeLAMA-R (Ours)']['final_ppl']:.2f} "
+            f"(purity={lm_s['3domain_calibrated']['DeLAMA-R (Ours)']['graph_same_pct']:.1f}%)"
+        )
+    lm_path = ROOT / "results" / "lm" / "lm_replay_free_benchmark.json"
     if lm_path.exists():
-        lm6 = json.loads(lm_path.read_text(encoding="utf-8"))
-        print(f"  TinyGPT 20NG  | Zero-Shot PPL -> Final DeLAMA-R metrics present ({lm_path.name})")
+        lm_raw = json.loads(lm_path.read_text(encoding="utf-8"))
+        check_close("Raw LM 20NG DeLAMA-R PPL", round(lm_raw["tracks"]["20ng"]["methods"]["DeLAMA-R (Ours)"]["final_ppl"], 2), 58.47)
+        check_close("Raw LM 3Domain Direct DeLAMA-R PPL", round(lm_raw["tracks"]["3domain_direct"]["methods"]["DeLAMA-R (Ours)"]["final_ppl"], 2), 63.47)
+        check_close("Raw LM 3Domain Calib DeLAMA-R PPL", round(lm_raw["tracks"]["3domain_calibrated"]["methods"]["DeLAMA-R (Ours)"]["final_ppl"], 2), 55.37)
+        print(f"  [OK] Verified raw replay-free LM benchmark ({lm_path.name})")
 
     # Optional full verification when Release v1.0.0 assets are extracted
     key_ckpts = manifest.get("key_checkpoints", {})

@@ -1804,5 +1804,355 @@
         ]
       }
     }
+  },
+  "lm_tinygpt": {
+    "20ng": {
+      "Zero-Shot (TinyGPT)": {
+        "final_ppl": 68.14,
+        "final_ppl_std": 6.71,
+        "avg_ppl": 68.14,
+        "comm_mb": 0.0,
+        "sec_per_ep": 0.02,
+        "mem_mb_per_agent": 0.0
+      },
+      "DisPFL": {
+        "final_ppl": 66.17,
+        "final_ppl_std": 5.72,
+        "avg_ppl": 66.32,
+        "comm_mb": 332.88,
+        "sec_per_ep": 12.18,
+        "mem_mb_per_agent": 1.19,
+        "graph_same_pct": 20.0
+      },
+      "L2C": {
+        "final_ppl": 64.04,
+        "final_ppl_std": 5.84,
+        "avg_ppl": 64.53,
+        "comm_mb": 475.55,
+        "sec_per_ep": 11.22,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 20.5
+      },
+      "CoDeC": {
+        "final_ppl": 61.88,
+        "final_ppl_std": 5.83,
+        "avg_ppl": 63.74,
+        "comm_mb": 137.28,
+        "sec_per_ep": 8.12,
+        "mem_mb_per_agent": 0.66,
+        "graph_same_pct": 50.0
+      },
+      "DFedAvgM": {
+        "final_ppl": 61.02,
+        "final_ppl_std": 5.81,
+        "avg_ppl": 63.5,
+        "comm_mb": 190.22,
+        "sec_per_ep": 4.73,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 50.0
+      },
+      "AFCL": {
+        "final_ppl": 60.84,
+        "final_ppl_std": 4.91,
+        "avg_ppl": 62.68,
+        "comm_mb": 435.92,
+        "sec_per_ep": 21.85,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 23.0
+      },
+      "DCFCL": {
+        "final_ppl": 60.56,
+        "final_ppl_std": 5.32,
+        "avg_ppl": 62.81,
+        "comm_mb": 449.02,
+        "sec_per_ep": 10.58,
+        "mem_mb_per_agent": 1.59,
+        "graph_same_pct": 20.0
+      },
+      "Online-FCL": {
+        "final_ppl": 60.4,
+        "final_ppl_std": 5.02,
+        "avg_ppl": 62.47,
+        "comm_mb": 475.55,
+        "sec_per_ep": 21.33,
+        "mem_mb_per_agent": 0.82,
+        "graph_same_pct": 20.0
+      },
+      "DeLAMA-NoMem (Solo)": {
+        "final_ppl": 70.27,
+        "final_ppl_std": 7.47,
+        "avg_ppl": 70.32,
+        "comm_mb": 0.0,
+        "sec_per_ep": 1.24,
+        "mem_mb_per_agent": 0.53
+      },
+      "DeLAMA-WC (Solo)": {
+        "final_ppl": 62.97,
+        "final_ppl_std": 5.99,
+        "avg_ppl": 66.21,
+        "comm_mb": 0.0,
+        "sec_per_ep": 1.09,
+        "mem_mb_per_agent": 2.25
+      },
+      "Uniform Complete Graph": {
+        "final_ppl": 56.71,
+        "final_ppl_std": 4.98,
+        "avg_ppl": 60.62,
+        "comm_mb": 507.25,
+        "sec_per_ep": 1.11,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 20.0
+      },
+      "DeLAMA-R (Ours)": {
+        "final_ppl": 58.47,
+        "final_ppl_std": 5.2,
+        "avg_ppl": 61.73,
+        "comm_mb": 637.56,
+        "sec_per_ep": 1.22,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 76.7
+      },
+      "DeLAMA-Oracle": {
+        "final_ppl": 59.83,
+        "final_ppl_std": 5.37,
+        "avg_ppl": 63.78,
+        "comm_mb": 101.45,
+        "sec_per_ep": 1.03,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 100.0
+      }
+    },
+    "3domain_direct": {
+      "Zero-Shot (TinyGPT)": {
+        "final_ppl": 278.93,
+        "final_ppl_std": 29.55,
+        "avg_ppl": 278.93,
+        "comm_mb": 0.0,
+        "sec_per_ep": 0.03,
+        "mem_mb_per_agent": 0.0
+      },
+      "DisPFL": {
+        "final_ppl": 73.75,
+        "final_ppl_std": 3.01,
+        "avg_ppl": 83.57,
+        "comm_mb": 1464.68,
+        "sec_per_ep": 24.2,
+        "mem_mb_per_agent": 1.19,
+        "graph_same_pct": 27.3
+      },
+      "L2C": {
+        "final_ppl": 138.42,
+        "final_ppl_std": 5.73,
+        "avg_ppl": 112.79,
+        "comm_mb": 2092.4,
+        "sec_per_ep": 21.73,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 27.1
+      },
+      "CoDeC": {
+        "final_ppl": 85.05,
+        "final_ppl_std": 2.89,
+        "avg_ppl": 104.56,
+        "comm_mb": 270.87,
+        "sec_per_ep": 16.14,
+        "mem_mb_per_agent": 0.66,
+        "graph_same_pct": 75.0
+      },
+      "DFedAvgM": {
+        "final_ppl": 96.75,
+        "final_ppl_std": 5.36,
+        "avg_ppl": 127.01,
+        "comm_mb": 380.44,
+        "sec_per_ep": 8.85,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 75.0
+      },
+      "AFCL": {
+        "final_ppl": 74.8,
+        "final_ppl_std": 2.31,
+        "avg_ppl": 92.16,
+        "comm_mb": 868.66,
+        "sec_per_ep": 45.25,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 60.5
+      },
+      "DCFCL": {
+        "final_ppl": 78.75,
+        "final_ppl_std": 4.6,
+        "avg_ppl": 89.3,
+        "comm_mb": 788.45,
+        "sec_per_ep": 21.74,
+        "mem_mb_per_agent": 1.59,
+        "graph_same_pct": 43.5
+      },
+      "Online-FCL": {
+        "final_ppl": 81.07,
+        "final_ppl_std": 3.03,
+        "avg_ppl": 91.16,
+        "comm_mb": 2092.4,
+        "sec_per_ep": 40.73,
+        "mem_mb_per_agent": 0.82,
+        "graph_same_pct": 27.3
+      },
+      "DeLAMA-NoMem (Solo)": {
+        "final_ppl": 178.1,
+        "final_ppl_std": 17.08,
+        "avg_ppl": 175.68,
+        "comm_mb": 0.0,
+        "sec_per_ep": 3.58,
+        "mem_mb_per_agent": 0.53
+      },
+      "DeLAMA-WC (Solo)": {
+        "final_ppl": 87.13,
+        "final_ppl_std": 3.85,
+        "avg_ppl": 109.12,
+        "comm_mb": 0.0,
+        "sec_per_ep": 3.03,
+        "mem_mb_per_agent": 2.25
+      },
+      "Uniform Complete Graph": {
+        "final_ppl": 71.23,
+        "final_ppl_std": 3.18,
+        "avg_ppl": 84.92,
+        "comm_mb": 2231.89,
+        "sec_per_ep": 3.19,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 27.3
+      },
+      "DeLAMA-R (Ours)": {
+        "final_ppl": 63.47,
+        "final_ppl_std": 1.91,
+        "avg_ppl": 75.51,
+        "comm_mb": 1635.68,
+        "sec_per_ep": 3.41,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 99.7
+      },
+      "DeLAMA-Oracle": {
+        "final_ppl": 62.85,
+        "final_ppl_std": 2.1,
+        "avg_ppl": 75.93,
+        "comm_mb": 608.7,
+        "sec_per_ep": 3.09,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 100.0
+      }
+    },
+    "3domain_calibrated": {
+      "Zero-Shot (TinyGPT)": {
+        "final_ppl": 81.38,
+        "final_ppl_std": 4.57,
+        "avg_ppl": 81.38,
+        "comm_mb": 0.0,
+        "sec_per_ep": 0.03,
+        "mem_mb_per_agent": 0.0
+      },
+      "DisPFL": {
+        "final_ppl": 67.03,
+        "final_ppl_std": 3.15,
+        "avg_ppl": 71.5,
+        "comm_mb": 1464.68,
+        "sec_per_ep": 23.0,
+        "mem_mb_per_agent": 1.19,
+        "graph_same_pct": 27.3
+      },
+      "L2C": {
+        "final_ppl": 66.97,
+        "final_ppl_std": 3.09,
+        "avg_ppl": 70.6,
+        "comm_mb": 2092.4,
+        "sec_per_ep": 21.03,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 28.0
+      },
+      "CoDeC": {
+        "final_ppl": 69.09,
+        "final_ppl_std": 3.45,
+        "avg_ppl": 71.99,
+        "comm_mb": 270.87,
+        "sec_per_ep": 15.01,
+        "mem_mb_per_agent": 0.66,
+        "graph_same_pct": 75.0
+      },
+      "DFedAvgM": {
+        "final_ppl": 67.39,
+        "final_ppl_std": 2.99,
+        "avg_ppl": 71.43,
+        "comm_mb": 380.44,
+        "sec_per_ep": 8.79,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 75.0
+      },
+      "AFCL": {
+        "final_ppl": 64.33,
+        "final_ppl_std": 2.54,
+        "avg_ppl": 68.72,
+        "comm_mb": 834.0,
+        "sec_per_ep": 41.03,
+        "mem_mb_per_agent": 1.06,
+        "graph_same_pct": 73.0
+      },
+      "DCFCL": {
+        "final_ppl": 65.47,
+        "final_ppl_std": 3.18,
+        "avg_ppl": 69.92,
+        "comm_mb": 777.36,
+        "sec_per_ep": 21.11,
+        "mem_mb_per_agent": 1.59,
+        "graph_same_pct": 68.9
+      },
+      "Online-FCL": {
+        "final_ppl": 64.88,
+        "final_ppl_std": 2.65,
+        "avg_ppl": 69.17,
+        "comm_mb": 2092.4,
+        "sec_per_ep": 38.11,
+        "mem_mb_per_agent": 0.82,
+        "graph_same_pct": 27.3
+      },
+      "DeLAMA-NoMem (Solo)": {
+        "final_ppl": 81.74,
+        "final_ppl_std": 4.49,
+        "avg_ppl": 81.36,
+        "comm_mb": 0.0,
+        "sec_per_ep": 4.18,
+        "mem_mb_per_agent": 0.53
+      },
+      "DeLAMA-WC (Solo)": {
+        "final_ppl": 66.79,
+        "final_ppl_std": 2.84,
+        "avg_ppl": 72.28,
+        "comm_mb": 0.0,
+        "sec_per_ep": 3.77,
+        "mem_mb_per_agent": 2.25
+      },
+      "Uniform Complete Graph": {
+        "final_ppl": 61.16,
+        "final_ppl_std": 2.53,
+        "avg_ppl": 65.79,
+        "comm_mb": 2231.89,
+        "sec_per_ep": 3.61,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 27.3
+      },
+      "DeLAMA-R (Ours)": {
+        "final_ppl": 55.37,
+        "final_ppl_std": 2.01,
+        "avg_ppl": 61.37,
+        "comm_mb": 2019.56,
+        "sec_per_ep": 3.69,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 100.0
+      },
+      "DeLAMA-Oracle": {
+        "final_ppl": 55.31,
+        "final_ppl_std": 2.04,
+        "avg_ppl": 61.26,
+        "comm_mb": 608.7,
+        "sec_per_ep": 3.53,
+        "mem_mb_per_agent": 2.25,
+        "graph_same_pct": 100.0
+      }
+    }
   }
 }

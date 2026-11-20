@@ -363,7 +363,7 @@ def run_delama_r_replay_free_episode(
          and labels are never retained; each step touches ONLY the current batch (X_t, Y_t).
       2. Zero vector-level global all-reduce and zero ad-hoc cosine gating:
          each agent locally unit-normalizes its 1-step origin signature before exchanging
-         with physical neighbors and solving the standard scalar-broadcast Eq. (6) dual-Newton QP.
+         with physical neighbors and solving the standard scalar-broadcast Eq. (7) dual-Newton QP.
       3. Zero knowledge of true group count G or group size:
          self-retention uses the local participation-ratio neighborhood size
          n_nbr_i = (sum_{j != i} W_row_{ij}^2)^{-1}, alpha_self_i = 1 / (1 + n_nbr_i).
@@ -443,7 +443,7 @@ def run_delama_r_replay_free_episode(
             W_mix = W_mix / W_mix.sum(dim=1, keepdim=True)
             adj_rec[t] = (W_mix * mask).numpy()
         else:
-            # Local unit-normalization -> pure scalar-broadcast Eq. (6) dual-Newton QP
+            # Local unit-normalization -> pure scalar-broadcast Eq. (7) dual-Newton QP
             Sig_u = F.normalize(torch.stack(sig_l), dim=-1)
             Wg = dual_ascent_graph(
                 Sig_u, torch.tensor(lam2_graph), torch.tensor(lam3_graph), mask, steps=da_steps
